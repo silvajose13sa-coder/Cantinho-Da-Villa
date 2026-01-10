@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Cantinho da Villa</title>
 
   <style>
-    * { box-sizing: border-box; }
-
     body {
       margin: 0;
       font-family: Arial, Helvetica, sans-serif;
@@ -18,91 +16,46 @@
     header {
       background: #b71c1c;
       color: white;
-      padding: 30px 20px;
+      padding: 20px;
       text-align: center;
     }
 
     header img {
-      max-width: 160px;
-      margin-bottom: 10px;
-    }
-
-    header h1 {
-      margin: 10px 0 5px;
-    }
-
-    header p {
-      margin: 0;
-      font-size: 16px;
-    }
-
-    .hero {
-      padding: 40px 20px;
-      text-align: center;
-      background: #ffe0b2;
-    }
-
-    .hero h2 {
-      color: #b71c1c;
+      max-width: 120px;
       margin-bottom: 10px;
     }
 
     section {
-      padding: 30px 20px;
-      max-width: 900px;
-      margin: auto;
-    }
-
-    h3 {
-      color: #b71c1c;
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    .menu {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-    }
-
-    .card {
-      background: white;
-      border-radius: 10px;
       padding: 20px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
     }
 
-    .card strong {
-      font-size: 18px;
-      display: block;
-      margin-bottom: 5px;
+    h2 {
+      color: #b71c1c;
     }
 
-    .price {
-      font-weight: bold;
-      margin-top: 8px;
-      display: block;
+    .cardapio {
+      background: white;
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 15px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
 
     .botao {
-      display: block;
-      width: fit-content;
-      margin: 30px auto 0;
+      display: inline-block;
       background: #25d366;
       color: white;
-      padding: 15px 25px;
+      padding: 15px 20px;
       border-radius: 30px;
       text-decoration: none;
-      font-size: 18px;
       font-weight: bold;
+      margin-top: 10px;
     }
 
     footer {
-      background: #333;
-      color: white;
+      background: #eee;
       text-align: center;
-      padding: 20px;
-      margin-top: 40px;
+      padding: 15px;
       font-size: 14px;
     }
   </style>
@@ -111,40 +64,32 @@
 <body>
 
   <header>
-    <img src="logo.png" alt="Cantinho da Villa">
     <h1>Cantinho da Villa</h1>
     <p>Sabor de vila, preço justo ❤️</p>
   </header>
 
-  <div class="hero">
-    <h2>Bem-vindo ao Cantinho da Villa</h2>
-    <p>Lanches caprichados pra matar sua fome 😋</p>
-  </div>
-
   <section>
-    <h3>🍔 Nosso Cardápio</h3>
+    <h2>🍔 Nosso Cardápio</h2>
 
-    <div class="menu">
-      <div class="card">
-        <strong>X-Burger</strong>
-        Pão, hambúrguer, queijo e molho especial
-        <span class="price">R$ 12,00</span>
-      </div>
-
-      <div class="card">
-        <strong>X-Salada</strong>
-        Hambúrguer, queijo, alface e tomate
-        <span class="price">R$ 15,00</span>
-      </div>
-
-      <div class="card">
-        <strong>Refrigerante Lata</strong>
-        Coca, Guaraná ou Fanta
-        <span class="price">R$ 5,00</span>
-      </div>
+    <div class="cardapio">
+      <strong>X-Burger</strong><br>
+      Pão, hambúrguer, queijo e molho especial<br>
+      <b>R$ 12,00</b>
     </div>
 
-    <a class="botao" href="https://wa.me/5511971385699?text=Olá!%20Quero%20fazer%20um%20pedido%20no%20Cantinho%20da%20Villa" target="_blank">
+    <div class="cardapio">
+      <strong>X-Salada</strong><br>
+      Hambúrguer, queijo, alface e tomate<br>
+      <b>R$ 15,00</b>
+    </div>
+
+    <div class="cardapio">
+      <strong>Refrigerante Lata</strong><br>
+      Coca, Guaraná ou Fanta<br>
+      <b>R$ 5,00</b>
+    </div>
+
+    <a class="botao" href="https://wa.me/5511971385699" target="_blank">
       📲 Pedir pelo WhatsApp
     </a>
   </section>
