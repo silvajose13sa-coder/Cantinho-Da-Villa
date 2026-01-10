@@ -1,141 +1,102 @@
-<!DOCTYPE html><html lang="pt-BR">
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Cantinho da Villa</title>
+
   <style>
-    * { box-sizing: border-box; }
     body {
       margin: 0;
       font-family: Arial, Helvetica, sans-serif;
-      background-color: #f5f5f5;
+      background: #fff7ec;
       color: #333;
     }
+
     header {
       background: #b71c1c;
-      color: #fff;
+      color: white;
       padding: 20px;
       text-align: center;
     }
-    header h1 { margin: 0; }
-    nav {
-      background: #8e1515;
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      padding: 10px;
+
+    header img {
+      max-width: 120px;
+      margin-bottom: 10px;
     }
-    nav a {
-      color: #fff;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    .hero {
-      padding: 40px 20px;
-      text-align: center;
-      background: #fff3e0;
-    }
-    .hero h2 { color: #b71c1c; }
+
     section {
-      padding: 30px 20px;
-      max-width: 900px;
-      margin: auto;
-    }
-    .menu-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-    }
-    .card {
-      background: #fff;
-      border-radius: 8px;
       padding: 20px;
+    }
+
+    h2 {
+      color: #b71c1c;
+    }
+
+    .cardapio {
+      background: white;
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 15px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
-    .card h3 { margin-top: 0; color: #b71c1c; }
-    .price { font-weight: bold; }
-    .btn {
+
+    .botao {
       display: inline-block;
-      margin-top: 10px;
-      padding: 10px 15px;
-      background: #b71c1c;
-      color: #fff;
+      background: #25d366;
+      color: white;
+      padding: 15px 20px;
+      border-radius: 30px;
       text-decoration: none;
-      border-radius: 5px;
+      font-weight: bold;
+      margin-top: 10px;
     }
+
     footer {
-      background: #333;
-      color: #fff;
+      background: #eee;
       text-align: center;
-      padding: 20px;
-      margin-top: 40px;
+      padding: 15px;
+      font-size: 14px;
     }
   </style>
 </head>
-<body><header style="display:flex;align-items:center;justify-content:center;gap:15px;flex-wrap:wrap;">
-  <img src="logo.png" alt="Cantinho da Villa" style="width:90px;height:auto;">
-  <div>
+
+<body>
+
+  <header>
     <h1>Cantinho da Villa</h1>
-    <p>Comida simples, gostosa e com preço justo</p>
-  </div>
-</header><nav>
-  <a href="#home">Início</a>
-  <a href="#menu">Cardápio</a>
-  <a href="#pedido">Pedidos</a>
-  <a href="#contato">Contato</a>
-</nav><div class="hero" id="home">
-  <h2>Bem-vindo ao Cantinho da Villa</h2>
-  <p>O lanche que cabe no bolso e mata a fome de verdade 😋</p>
-  <a class="btn" href="#menu">Ver Cardápio</a>
-</div><section id="menu">
-  <h2>📋 Cardápio</h2>
-  <div class="menu-grid"><div class="card">
-  <h3>🌭 Cachorro-quente Tradicional</h3>
-  <p>Pão, salsicha, molho especial e batata palha</p>
-  <p class="price">R$ 10,00</p>
-</div>
+    <p>Sabor de vila, preço justo ❤️</p>
+  </header>
 
-<div class="card">
-  <h3>🌭 Cachorro-quente Completo</h3>
-  <p>Tradicional + milho, ervilha e vinagrete</p>
-  <p class="price">R$ 12,00</p>
-</div>
+  <section>
+    <h2>🍔 Nosso Cardápio</h2>
 
-<div class="card">
-  <h3>🍔 Hambúrguer Simples</h3>
-  <p>Pão, hambúrguer, queijo e molho</p>
-  <p class="price">R$ 12,00</p>
-</div>
+    <div class="cardapio">
+      <strong>X-Burger</strong><br>
+      Pão, hambúrguer, queijo e molho especial<br>
+      <b>R$ 12,00</b>
+    </div>
 
-<div class="card">
-  <h3>🍔 Hambúrguer Completo</h3>
-  <p>Hambúrguer, queijo, presunto, alface e tomate</p>
-  <p class="price">R$ 15,00</p>
-</div>
+    <div class="cardapio">
+      <strong>X-Salada</strong><br>
+      Hambúrguer, queijo, alface e tomate<br>
+      <b>R$ 15,00</b>
+    </div>
 
-<div class="card">
-  <h3>🍟 Batata Frita</h3>
-  <p>Porção crocante</p>
-  <p class="price">R$ 8,00</p>
-</div>
+    <div class="cardapio">
+      <strong>Refrigerante Lata</strong><br>
+      Coca, Guaraná ou Fanta<br>
+      <b>R$ 5,00</b>
+    </div>
 
-<div class="card">
-  <h3>🥤 Refrigerante Lata</h3>
-  <p>Vários sabores</p>
-  <p class="price">R$ 5,00</p>
-</div>
+    <a class="botao" href="https://wa.me/5511971385699" target="_blank">
+      📲 Pedir pelo WhatsApp
+    </a>
+  </section>
 
-  </div>
-</section><section id="pedido">
-  <h2>📦 Faça seu pedido</h2>
-  <p>Peça agora pelo WhatsApp e retire no local.</p>
-  <a class="btn" href="https://wa.me/5511999999999" target="_blank">Pedir no WhatsApp</a>
-</section><section id="contato">
-  <h2>📍 Contato</h2>
-  <p><strong>WhatsApp:</strong> (11) 9XXXX-XXXX</p>
-  <p><strong>Instagram:</strong> @cantinhodavilla</p>
-  <p>Atendimento no bairro</p>
-</section><footer>
-  <p>© 2026 Cantinho da Villa - Todos os direitos reservados</p>
-</footer></body>
+  <footer>
+    © 2026 Cantinho da Villa • Todos os direitos reservados
+  </footer>
+
+</body>
 </html>
