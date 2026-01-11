@@ -195,8 +195,7 @@
 
     function adicionarCarrinho(nome, preco) {
       carrinho.push({nome, preco});
-      alert(nome + ' adicionado ao carrinho!');
-      atualizarCarrinho();
+      atualizarCarrinho(); // sem alert
     }
 
     function removerItem(indice) {
@@ -227,8 +226,24 @@
         conteudo += `${item.nome} - R$ ${item.preco.toFixed(2)} <button onclick="removerItem(${index})" style=\"background:#b71c1c; color:white; border:none; border-radius:3px; cursor:pointer; margin-left:5px;\">❌</button><br>`;
         total += item.preco;
       });
-      conteudo += `<hr>Total: R$ ${total.toFixed(2)}`;
+      conteudo += `<hr>Total: R$ ${total.toFixed(2)}<br>`;
+      conteudo += `<button onclick="finalizarPedido()" style='margin-top:10px; padding:10px 15px; background:#25D366; color:white; border:none; border-radius:5px; cursor:pointer;'>📲 Finalizar Pedido</button>`;
+
       carrinhoDiv.innerHTML = conteudo;
+    }
+
+    function finalizarPedido() {
+      if(carrinho.length === 0) {
+        alert('Seu carrinho está vazio!');
+        return;
+      }
+      let texto = 'Olá! Quero fazer o pedido:%0A';
+      carrinho.forEach(item => {
+        texto += `- ${item.nome} - R$ ${item.preco.toFixed(2)}%0A`;
+      });
+      let total = carrinho.reduce((sum, item) => sum + item.preco, 0);
+      texto += `Total: R$ ${total.toFixed(2)}`;
+      window.open('https://wa.me/5511971385699?text=' + texto, '_blank');
     }
   </script>
 
