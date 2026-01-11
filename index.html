@@ -199,6 +199,11 @@
       atualizarCarrinho();
     }
 
+    function removerItem(indice) {
+      carrinho.splice(indice, 1);
+      atualizarCarrinho();
+    }
+
     function atualizarCarrinho() {
       let carrinhoDiv = document.getElementById('carrinho');
       if (!carrinhoDiv) {
@@ -211,15 +216,18 @@
         carrinhoDiv.style.color = 'white';
         carrinhoDiv.style.padding = '15px';
         carrinhoDiv.style.borderRadius = '10px';
+        carrinhoDiv.style.maxHeight = '300px';
+        carrinhoDiv.style.overflowY = 'auto';
         document.body.appendChild(carrinhoDiv);
       }
+
       let total = 0;
       let conteudo = '<strong>Carrinho:</strong><br>';
-      carrinho.forEach(item => {
-        conteudo += item.nome + ' - R$ ' + item.preco.toFixed(2) + '<br>';
+      carrinho.forEach((item, index) => {
+        conteudo += `${item.nome} - R$ ${item.preco.toFixed(2)} <button onclick="removerItem(${index})" style=\"background:#b71c1c; color:white; border:none; border-radius:3px; cursor:pointer; margin-left:5px;\">❌</button><br>`;
         total += item.preco;
       });
-      conteudo += '<hr>Total: R$ ' + total.toFixed(2);
+      conteudo += `<hr>Total: R$ ${total.toFixed(2)}`;
       carrinhoDiv.innerHTML = conteudo;
     }
   </script>
