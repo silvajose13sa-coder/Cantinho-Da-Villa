@@ -1,82 +1,229 @@
 <!DOCTYPE html>
-<h2>🥤 Bebidas</h2>
-<div class="menu-grid">
-<div class="card">
-<h3>Refrigerante Lata</h3>
-Coca, Guaraná ou Fanta
-<p class="price">R$ 5,00</p>
-<button onclick="adicionarCarrinho('Refrigerante Lata', 5)">Adicionar ao carrinho</button>
-</div>
-<div class="card">
-<h3>Suco Natural</h3>
-Laranja, limão ou abacaxi
-<p class="price">R$ 6,00</p>
-<button onclick="adicionarCarrinho('Suco Natural', 6)">Adicionar ao carrinho</button>
-</div>
-</div>
-</section>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cantinho da Villa</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: #fff8e1;
+      color: #333;
+    }
 
+    header {
+      background: #d32f2f;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
 
-<section id="combos">
-<h2>🎁 Combos</h2>
-<div class="menu-grid">
-<div class="card">
-<h3>Combo X-Burger</h3>
-X-Burger + Batata + Refrigerante
-<p class="price">R$ 18,00</p>
-<button onclick="adicionarCarrinho('Combo X-Burger', 18)">Adicionar ao carrinho</button>
-</div>
-<div class="card">
-<h3>Combo Hot Dog</h3>
-Hot Dog + Batata + Suco
-<p class="price">R$ 16,00</p>
-<button onclick="adicionarCarrinho('Combo Hot Dog', 16)">Adicionar ao carrinho</button>
-</div>
-</div>
-</section>
+    header img {
+      max-width: 160px;
+      margin-bottom: 10px;
+    }
 
+    nav {
+      background: #388e3c;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      padding: 15px 0;
+    }
 
-<footer>
-© 2026 Cantinho da Villa • Todos os direitos reservados
-</footer>
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 8px 15px;
+      border-radius: 5px;
+      transition: background 0.3s;
+    }
 
+    nav a:hover {
+      background: #2e7d32;
+    }
 
-<script>
-let carrinho = [];
+    section {
+      padding: 30px 20px;
+      max-width: 900px;
+      margin: auto;
+    }
 
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
 
-function adicionarCarrinho(nome, preco) {
-carrinho.push({nome, preco});
-alert(nome + ' adicionado ao carrinho!');
-atualizarCarrinho();
-}
+    .card {
+      background: #ffffff;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
 
+    .card h3 {
+      margin-top: 0;
+      color: #d32f2f;
+    }
 
-function atualizarCarrinho() {
-let carrinhoDiv = document.getElementById('carrinho');
-if (!carrinhoDiv) {
-carrinhoDiv = document.createElement('div');
-carrinhoDiv.id = 'carrinho';
-carrinhoDiv.style.position = 'fixed';
-carrinhoDiv.style.bottom = '10px';
-carrinhoDiv.style.right = '10px';
-carrinhoDiv.style.background = '#388e3c';
-carrinhoDiv.style.color = 'white';
-carrinhoDiv.style.padding = '15px';
-carrinhoDiv.style.borderRadius = '10px';
-document.body.appendChild(carrinhoDiv);
-}
-let total = 0;
-let conteudo = '<strong>Carrinho:</strong><br>';
-carrinho.forEach(item => {
-conteudo += item.nome + ' - R$ ' + item.preco.toFixed(2) + '<br>';
-total += item.preco;
-});
-conteudo += '<hr>Total: R$ ' + total.toFixed(2);
-carrinhoDiv.innerHTML = conteudo;
-}
-</script>
+    .price {
+      font-weight: bold;
+    }
 
+    .btn, .card button {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 15px;
+      background: #d32f2f;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .card button:hover, .btn:hover {
+      background: #b71c1c;
+    }
+
+    footer {
+      background: #388e3c;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <img src="logo.png" alt="Cantinho da Villa">
+    <h1>Cantinho da Villa</h1>
+    <p style="font-weight:bold;">Sabor que abraça 😋</p>
+  </header>
+
+  <nav>
+    <a href="#hamburgueres">Hambúrgueres</a>
+    <a href="#hotdogs">Hot Dogs</a>
+    <a href="#bebidas">Bebidas</a>
+    <a href="#combos">Combos</a>
+  </nav>
+
+  <section id="hamburgueres">
+    <h2>🍔 Hambúrgueres</h2>
+    <div class="menu-grid">
+      <div class="card">
+        <h3>X-Burger</h3>
+        Pão, hambúrguer, queijo e molho especial
+        <p class="price">R$ 12,00</p>
+        <button onclick="adicionarCarrinho('X-Burger', 12)">Adicionar ao carrinho</button>
+      </div>
+      <div class="card">
+        <h3>X-Salada</h3>
+        Hambúrguer, queijo, alface e tomate
+        <p class="price">R$ 15,00</p>
+        <button onclick="adicionarCarrinho('X-Salada', 15)">Adicionar ao carrinho</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="hotdogs">
+    <h2>🌭 Hot Dogs</h2>
+    <div class="menu-grid">
+      <div class="card">
+        <h3>Hot Dog Tradicional</h3>
+        Salsicha, molho, mostarda e ketchup
+        <p class="price">R$ 10,00</p>
+        <button onclick="adicionarCarrinho('Hot Dog Tradicional', 10)">Adicionar ao carrinho</button>
+      </div>
+      <div class="card">
+        <h3>Hot Dog Especial</h3>
+        Salsicha, queijo, bacon, vinagrete
+        <p class="price">R$ 14,00</p>
+        <button onclick="adicionarCarrinho('Hot Dog Especial', 14)">Adicionar ao carrinho</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="bebidas">
+    <h2>🥤 Bebidas</h2>
+    <div class="menu-grid">
+      <div class="card">
+        <h3>Refrigerante Lata</h3>
+        Coca, Guaraná ou Fanta
+        <p class="price">R$ 5,00</p>
+        <button onclick="adicionarCarrinho('Refrigerante Lata', 5)">Adicionar ao carrinho</button>
+      </div>
+      <div class="card">
+        <h3>Suco Natural</h3>
+        Laranja, limão ou abacaxi
+        <p class="price">R$ 6,00</p>
+        <button onclick="adicionarCarrinho('Suco Natural', 6)">Adicionar ao carrinho</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="combos">
+    <h2>🎁 Combos</h2>
+    <div class="menu-grid">
+      <div class="card">
+        <h3>Combo X-Burger</h3>
+        X-Burger + Batata + Refrigerante
+        <p class="price">R$ 18,00</p>
+        <button onclick="adicionarCarrinho('Combo X-Burger', 18)">Adicionar ao carrinho</button>
+      </div>
+      <div class="card">
+        <h3>Combo Hot Dog</h3>
+        Hot Dog + Batata + Suco
+        <p class="price">R$ 16,00</p>
+        <button onclick="adicionarCarrinho('Combo Hot Dog', 16)">Adicionar ao carrinho</button>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 Cantinho da Villa • Todos os direitos reservados
+  </footer>
+
+  <script>
+    let carrinho = [];
+
+    function adicionarCarrinho(nome, preco) {
+      carrinho.push({nome, preco});
+      alert(nome + ' adicionado ao carrinho!');
+      atualizarCarrinho();
+    }
+
+    function atualizarCarrinho() {
+      let carrinhoDiv = document.getElementById('carrinho');
+      if (!carrinhoDiv) {
+        carrinhoDiv = document.createElement('div');
+        carrinhoDiv.id = 'carrinho';
+        carrinhoDiv.style.position = 'fixed';
+        carrinhoDiv.style.bottom = '10px';
+        carrinhoDiv.style.right = '10px';
+        carrinhoDiv.style.background = '#388e3c';
+        carrinhoDiv.style.color = 'white';
+        carrinhoDiv.style.padding = '15px';
+        carrinhoDiv.style.borderRadius = '10px';
+        document.body.appendChild(carrinhoDiv);
+      }
+      let total = 0;
+      let conteudo = '<strong>Carrinho:</strong><br>';
+      carrinho.forEach(item => {
+        conteudo += item.nome + ' - R$ ' + item.preco.toFixed(2) + '<br>';
+        total += item.preco;
+      });
+      conteudo += '<hr>Total: R$ ' + total.toFixed(2);
+      carrinhoDiv.innerHTML = conteudo;
+    }
+  </script>
 
 </body>
 </html>
