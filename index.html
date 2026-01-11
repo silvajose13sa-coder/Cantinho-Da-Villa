@@ -15,27 +15,28 @@ body {
   color: #333;
 }
 
-/* TOPO COM IMAGEM DA VILA */
+/* TOPO COM IMAGEM DE FUNDO DA VILA */
 header {
   background: url("img/vila-topo.jpg") center/cover no-repeat;
   color: white;
   text-align: center;
-  padding: 60px 20px;
+  padding: 80px 20px; /* aumenta para mostrar melhor a vila */
   position: relative;
 }
 
+/* LOGO SOBRE O FUNDO */
 header img {
   max-width: 160px;
-  margin-bottom: 10px;
   position: relative;
   z-index: 2;
+  margin-bottom: 10px;
 }
 
 header h1 {
   margin: 10px 0 5px;
-  text-shadow: 2px 2px 4px rgba(0,0,0,.6);
   position: relative;
   z-index: 2;
+  text-shadow: 2px 2px 4px rgba(0,0,0,.6);
 }
 
 /* MENU */
@@ -45,6 +46,8 @@ nav {
   justify-content: center;
   gap: 20px;
   padding: 15px;
+  position: relative;
+  z-index: 2;
 }
 
 nav a {
@@ -65,6 +68,8 @@ nav a:hover {
 .menu-bg {
   background: url("img/restaurante.webp") center/cover no-repeat;
   padding: 40px 20px;
+  position: relative;
+  z-index: 1;
 }
 
 /* SEÇÕES */
@@ -73,9 +78,10 @@ section {
   margin: auto;
   position: relative;
   z-index: 2;
-  background: rgba(255,255,255,0.95); /* para o cardápio ficar legível */
+  background: rgba(255,255,255,0.95); /* deixa o cardápio legível */
   border-radius: 12px;
   padding: 20px;
+  margin-bottom: 40px;
 }
 
 h2 {
@@ -180,14 +186,12 @@ h2 {
   cursor: pointer;
 }
 
-/* FOOTER */
+/* FOOTER COM IMAGENS */
 footer {
   background: #2e7d32;
   color: white;
   text-align: center;
   padding: 30px;
-  position: relative;
-  z-index: 2;
 }
 
 footer img {
@@ -205,7 +209,7 @@ footer img:hover {
 <body>
 
 <header>
-  <!-- LOGO CORRIGIDA PARA APARECER SOBRE A IMAGEM DA VILA -->
+  <!-- LOGO SOBRE O FUNDO -->
   <img src="img/logo.png" alt="Cantinho da Villa">
   <h1>Cantinho da Villa</h1>
   <p>Sabor que abraça 😋</p>
