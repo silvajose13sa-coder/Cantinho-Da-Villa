@@ -97,6 +97,12 @@
       padding: 20px;
       margin-top: 40px;
     }
+
+    footer img {
+      width: 30px;
+      vertical-align: middle;
+      margin-right: 10px;
+    }
   </style>
 </head>
 <body>
@@ -188,6 +194,14 @@
 
   <footer>
     © 2026 Cantinho da Villa • Todos os direitos reservados
+    <div style="margin-top:10px;">
+      <a href="https://www.instagram.com/seu_usuario_instagram" target="_blank">
+        <img src="instagram-icon.png" alt="Instagram">
+      </a>
+      <a href="https://wa.me/5511971385699" target="_blank">
+        <img src="whatsapp-icon.png" alt="WhatsApp">
+      </a>
+    </div>
   </footer>
 
   <script>
@@ -195,7 +209,7 @@
 
     function adicionarCarrinho(nome, preco) {
       carrinho.push({nome, preco});
-      atualizarCarrinho(); // sem alert
+      atualizarCarrinho();
     }
 
     function removerItem(indice) {
@@ -243,7 +257,7 @@
       });
       let total = carrinho.reduce((sum, item) => sum + item.preco, 0);
       texto += `Total: R$ ${total.toFixed(2)}`;
-      window.open('https://wa.me/5511913533982?text=' + texto, '_blank');
+      window.open('https://wa.me/5511971385699?text=' + texto, '_blank');
     }
   </script>
 
