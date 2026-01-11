@@ -1,172 +1,311 @@
-// ===============================
-// CARRINHO DE COMPRAS
-// ===============================
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cantinho da Villa</title>
 
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #fff8e1;
+  color: #333;
+}
+
+/* TOPO COM IMAGEM DA VILA */
+header {
+  background: url("vila-topo.jpg") center/cover no-repeat;
+  color: white;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+header img {
+  max-width: 160px;
+  margin-bottom: 10px;
+}
+
+header h1 {
+  margin: 10px 0 5px;
+  text-shadow: 2px 2px 4px rgba(0,0,0,.6);
+}
+
+/* MENU */
+nav {
+  background: #2e7d32;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 15px;
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 10px 18px;
+  border-radius: 8px;
+  transition: transform .3s, background .3s;
+}
+
+nav a:hover {
+  background: #1b5e20;
+  transform: translateY(-6px);
+}
+
+/* FUNDO DO CARDÁPIO */
+.menu-bg {
+  background: url("restaurante-bg.jpg") center/cover no-repeat;
+  padding: 40px 20px;
+}
+
+/* SEÇÕES */
+section {
+  max-width: 1000px;
+  margin: auto;
+}
+
+h2 {
+  color: #b71c1c;
+  text-align: center;
+}
+
+/* GRID */
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+/* CARD */
+.card {
+  background: rgba(255,255,255,.95);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,.2);
+  transition: transform .3s;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+}
+
+.card h3 {
+  margin-top: 0;
+  color: #d32f2f;
+}
+
+.price {
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+/* BOTÃO */
+.card button {
+  margin-top: 10px;
+  padding: 10px;
+  width: 100%;
+  border: none;
+  border-radius: 6px;
+  background: #d32f2f;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.card button:hover {
+  background: #b71c1c;
+}
+
+/* CARRINHO */
+#carrinho {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: white;
+  padding: 15px;
+  width: 260px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,.3);
+}
+
+#carrinho h3 {
+  margin-top: 0;
+}
+
+#carrinho ul {
+  list-style: none;
+  padding: 0;
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+#carrinho li {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+#carrinho button {
+  background: red;
+  border: none;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#finalizar {
+  background: #25D366;
+  margin-top: 10px;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  color: white;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* FOOTER */
+footer {
+  background: #2e7d32;
+  color: white;
+  text-align: center;
+  padding: 30px;
+}
+
+footer img {
+  width: 40px;
+  margin: 10px;
+  transition: transform .3s;
+}
+
+footer img:hover {
+  transform: scale(1.15);
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <img src="logo.png" alt="Cantinho da Villa">
+  <h1>Cantinho da Villa</h1>
+  <p>Sabor que abraça 😋</p>
+</header>
+
+<nav>
+  <a href="#hamburguer">🍔 Hambúrguer</a>
+  <a href="#hotdog">🌭 Hot Dog</a>
+  <a href="#bebidas">🥤 Bebidas</a>
+  <a href="#combos">🎁 Combos</a>
+</nav>
+
+<div class="menu-bg">
+
+<section id="hamburguer">
+<h2>Hambúrgueres</h2>
+<div class="menu-grid">
+  <div class="card">
+    <h3>X-Xisquinho</h3>
+    O X-tudo da vila
+    <p class="price">R$ 15,00</p>
+    <button onclick="add('X-Xisquinho',15)">Adicionar</button>
+  </div>
+</div>
+</section>
+
+<section id="hotdog">
+<h2>Hot Dogs</h2>
+<div class="menu-grid">
+  <div class="card">
+    <h3>Hot Dog de Pote</h3>
+    Clássico da vila
+    <p class="price">R$ 12,00</p>
+    <button onclick="add('Hot Dog de Pote',12)">Adicionar</button>
+  </div>
+</div>
+</section>
+
+<section id="bebidas">
+<h2>Bebidas</h2>
+<div class="menu-grid">
+  <div class="card">
+    <h3>Refrigerante</h3>
+    Coca, Fanta ou Guaraná
+    <p class="price">R$ 5,00</p>
+    <button onclick="add('Refrigerante',5)">Adicionar</button>
+  </div>
+</div>
+</section>
+
+<section id="combos">
+<h2>Combos</h2>
+<div class="menu-grid">
+  <div class="card">
+    <h3>Combo Villa</h3>
+    Lanche + bebida
+    <p class="price">R$ 18,00</p>
+    <button onclick="add('Combo Villa',18)">Adicionar</button>
+  </div>
+</div>
+</section>
+
+</div>
+
+<div id="carrinho">
+<h3>🛒 Carrinho</h3>
+<ul id="lista"></ul>
+<p><b>Total: R$ <span id="total">0</span></b></p>
+<button id="finalizar" onclick="finalizar()">Finalizar no WhatsApp</button>
+</div>
+
+<footer>
+<p>Siga a gente</p>
+<a href="https://instagram.com/cantinho_da_villazs" target="_blank">
+<img src="instagram.png">
+</a>
+<a href="https://wa.me/5511913533982" target="_blank">
+<img src="whatsapp.png">
+</a>
+</footer>
+
+<script>
 let carrinho = [];
-let carrinhoAberto = false;
+let total = 0;
 
-// Criar carrinho visual automaticamente
-document.addEventListener("DOMContentLoaded", () => {
-  const carrinhoHTML = `
-    <div id="carrinho-btn" onclick="toggleCarrinho()">
-      🛒 <span id="contador-carrinho">0</span>
-    </div>
-
-    <div id="carrinho-box">
-      <h3>🛒 Seu Carrinho</h3>
-      <ul id="lista-carrinho"></ul>
-      <p id="total-carrinho">Total: R$ 0,00</p>
-      <button onclick="finalizarPedido()">Finalizar Pedido</button>
-    </div>
-  `;
-
-  document.body.insertAdjacentHTML("beforeend", carrinhoHTML);
-  aplicarEstiloCarrinho();
-});
-
-// ===============================
-// FUNÇÕES DO CARRINHO
-// ===============================
-
-function adicionarCarrinho(nome, preco) {
-  carrinho.push({ nome, preco });
-  atualizarCarrinho();
+function add(nome, preco){
+  carrinho.push({nome,preco});
+  total += preco;
+  render();
 }
 
-function atualizarCarrinho() {
-  const lista = document.getElementById("lista-carrinho");
-  const totalEl = document.getElementById("total-carrinho");
-  const contador = document.getElementById("contador-carrinho");
+function remover(i){
+  total -= carrinho[i].preco;
+  carrinho.splice(i,1);
+  render();
+}
 
+function render(){
+  const lista = document.getElementById("lista");
   lista.innerHTML = "";
-  let total = 0;
-
-  carrinho.forEach((item, index) => {
-    total += item.preco;
-
-    const li = document.createElement("li");
-    li.innerHTML = `
-      ${item.nome} - R$ ${item.preco.toFixed(2)}
-      <span onclick="removerItem(${index})">❌</span>
-    `;
-    lista.appendChild(li);
+  carrinho.forEach((item,i)=>{
+    lista.innerHTML += `<li>${item.nome} <button onclick="remover(${i})">X</button></li>`;
   });
-
-  totalEl.innerText = `Total: R$ ${total.toFixed(2)}`;
-  contador.innerText = carrinho.length;
+  document.getElementById("total").innerText = total.toFixed(2);
 }
 
-function removerItem(index) {
-  carrinho.splice(index, 1);
-  atualizarCarrinho();
+function finalizar(){
+  let msg = "Pedido Cantinho da Villa:%0A";
+  carrinho.forEach(i => msg += `- ${i.nome}%0A`);
+  msg += `Total: R$ ${total.toFixed(2)}`;
+  window.open(`https://wa.me/5511913533982?text=${msg}`);
 }
+</script>
 
-function toggleCarrinho() {
-  const box = document.getElementById("carrinho-box");
-  carrinhoAberto = !carrinhoAberto;
-  box.style.display = carrinhoAberto ? "block" : "none";
-}
-
-function finalizarPedido() {
-  if (carrinho.length === 0) {
-    alert("Seu carrinho está vazio 😅");
-    return;
-  }
-
-  let mensagem = "🛒 Pedido Cantinho da Villa:%0A";
-  let total = 0;
-
-  carrinho.forEach(item => {
-    mensagem += `- ${item.nome} (R$ ${item.preco.toFixed(2)})%0A`;
-    total += item.preco;
-  });
-
-  mensagem += `%0ATotal: R$ ${total.toFixed(2)}`;
-
-  window.open(`https://wa.me/5511913533982?text=${mensagem}`, "_blank");
-}
-
-// ===============================
-// ESTILO DO CARRINHO (JS INJETADO)
-// ===============================
-
-function aplicarEstiloCarrinho() {
-  const style = document.createElement("style");
-  style.innerHTML = `
-    #carrinho-btn {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: #d32f2f;
-      color: #fff;
-      padding: 15px 18px;
-      border-radius: 50px;
-      cursor: pointer;
-      font-weight: bold;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      z-index: 9999;
-    }
-
-    #carrinho-btn span {
-      background: #fff;
-      color: #d32f2f;
-      padding: 3px 8px;
-      border-radius: 50%;
-      margin-left: 6px;
-    }
-
-    #carrinho-box {
-      position: fixed;
-      bottom: 90px;
-      right: 20px;
-      background: #fff;
-      width: 260px;
-      border-radius: 10px;
-      padding: 15px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-      display: none;
-      z-index: 9999;
-    }
-
-    #carrinho-box h3 {
-      margin-top: 0;
-      color: #d32f2f;
-      text-align: center;
-    }
-
-    #lista-carrinho {
-      list-style: none;
-      padding: 0;
-      max-height: 150px;
-      overflow-y: auto;
-    }
-
-    #lista-carrinho li {
-      display: flex;
-      justify-content: space-between;
-      font-size: 14px;
-      margin-bottom: 6px;
-    }
-
-    #lista-carrinho span {
-      cursor: pointer;
-    }
-
-    #carrinho-box button {
-      width: 100%;
-      background: #388e3c;
-      color: #fff;
-      border: none;
-      padding: 10px;
-      border-radius: 5px;
-      cursor: pointer;
-      font-weight: bold;
-      margin-top: 10px;
-    }
-
-    #carrinho-box button:hover {
-      background: #2e7d32;
-    }
-  `;
-  document.head.appendChild(style);
-}
+</body>
+</html>
