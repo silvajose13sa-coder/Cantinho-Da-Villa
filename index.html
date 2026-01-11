@@ -12,49 +12,68 @@
       background-color: #fff8e1; /* Amarelo claro da vila */
       color: #333;
     }
+
     header {
       background: #d32f2f; /* Vermelho vibrante */
       color: #fff;
       padding: 20px;
       text-align: center;
     }
-    header h1 { margin: 0; }
+
+    header img {
+      max-width: 160px;
+      margin-bottom: 10px;
+    }
+
     nav {
       background: #388e3c; /* Verde */
       display: flex;
       justify-content: center;
       gap: 20px;
-      padding: 10px;
+      padding: 15px 0;
     }
+
     nav a {
       color: #fff;
       text-decoration: none;
       font-weight: bold;
+      padding: 8px 15px;
+      border-radius: 5px;
+      transition: background 0.3s;
     }
-    .hero {
-      padding: 40px 20px;
-      text-align: center;
-      background: #fff3e0; /* Amarelo suave */
+
+    nav a:hover {
+      background: #2e7d32;
     }
-    .hero h2 { color: #d32f2f; }
+
     section {
       padding: 30px 20px;
       max-width: 900px;
       margin: auto;
     }
+
     .menu-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 20px;
     }
+
     .card {
       background: #ffffff;
       border-radius: 8px;
       padding: 20px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
-    .card h3 { margin-top: 0; color: #d32f2f; }
-    .price { font-weight: bold; }
+
+    .card h3 {
+      margin-top: 0;
+      color: #d32f2f;
+    }
+
+    .price {
+      font-weight: bold;
+    }
+
     .btn {
       display: inline-block;
       margin-top: 10px;
@@ -64,6 +83,7 @@
       text-decoration: none;
       border-radius: 5px;
     }
+
     footer {
       background: #388e3c;
       color: #fff;
@@ -74,23 +94,87 @@
   </style>
 </head>
 <body>
-  <header style="text-align:center; padding:20px;">
-    <img src="logo.png" alt="Cantinho da Villa" style="max-width:160px; margin-bottom:10px;">
+
+  <header>
+    <img src="logo.png" alt="Cantinho da Villa">
     <h1>Cantinho da Villa</h1>
     <p style="font-weight:bold;">Sabor que abraça 😋</p>
   </header>
 
-  <section style="padding:20px; max-width:600px; margin:auto;">
-    <h2>Cardápio</h2>
-    <ul>
-      <li>🍔 Hambúrgueres</li>
-      <li>🌭 Hot Dogs</li>
-      <li>🥤 Bebidas</li>
-      <li>🎁 Combos</li>
-    </ul>
+  <nav>
+    <a href="#hamburgueres">Hambúrgueres</a>
+    <a href="#hotdogs">Hot Dogs</a>
+    <a href="#bebidas">Bebidas</a>
+    <a href="#combos">Combos</a>
+  </nav>
 
+  <section id="hamburgueres">
+    <h2>🍔 Hambúrgueres</h2>
+    <div class="menu-grid">
+      <div class="card">
+        <h3>X-Burger</h3>
+        Pão, hambúrguer, queijo e molho especial
+        <p class="price">R$ 12,00</p>
+      </div>
+      <div class="card">
+        <h3>X-Salada</h3>
+        Hambúrguer, queijo, alface e tomate
+        <p class="price">R$ 15,00</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="hotdogs">
+    <h2>🌭 Hot Dogs</h2>
+    <div class="menu-grid">
+      <div class="card">
+        <h3>Hot Dog Tradicional</h3>
+        Salsicha, molho, mostarda e ketchup
+        <p class="price">R$ 10,00</p>
+      </div>
+      <div class="card">
+        <h3>Hot Dog Especial</h3>
+        Salsicha, queijo, bacon, vinagrete
+        <p class="price">R$ 14,00</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="bebidas">
+    <h2>🥤 Bebidas</h2>
+    <div class="menu-grid">
+      <div class="card">
+        <h3>Refrigerante Lata</h3>
+        Coca, Guaraná ou Fanta
+        <p class="price">R$ 5,00</p>
+      </div>
+      <div class="card">
+        <h3>Suco Natural</h3>
+        Laranja, limão ou abacaxi
+        <p class="price">R$ 6,00</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="combos">
+    <h2>🎁 Combos</h2>
+    <div class="menu-grid">
+      <div class="card">
+        <h3>Combo X-Burger</h3>
+        X-Burger + Batata + Refrigerante
+        <p class="price">R$ 18,00</p>
+      </div>
+      <div class="card">
+        <h3>Combo Hot Dog</h3>
+        Hot Dog + Batata + Suco
+        <p class="price">R$ 16,00</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="text-align:center; margin:40px 0;">
     <a href="https://wa.me/5511971385699?text=Olá!%20Quero%20fazer%20um%20pedido%20no%20Cantinho%20da%20Villa" 
-       style="display:block; text-align:center; margin-top:30px; padding:15px; background:#25D366; color:white; text-decoration:none; font-size:18px; border-radius:8px;">
+       class="btn">
        📲 Pedir pelo WhatsApp
     </a>
   </section>
@@ -98,5 +182,6 @@
   <footer>
     © 2026 Cantinho da Villa • Todos os direitos reservados
   </footer>
+
 </body>
 </html>
