@@ -1,131 +1,158 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cantinho da Villa</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cantinho da Villa</title>
 
-  <style>
-    * { box-sizing: border-box; }
+<style>
+* { box-sizing: border-box; }
 
-    body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background-color: #fff8e1;
-      color: #333;
-    }
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #fff8e1;
+  color: #333;
+}
 
-    /* TOPO */
-    header {
-      background: #d32f2f;
-      color: #fff;
-      padding: 20px;
-      text-align: center;
-    }
+header {
+  background: #d32f2f;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}
 
-    header img {
-      max-width: 160px;
-      margin-bottom: 10px;
-    }
+nav {
+  background: #388e3c;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 15px;
+}
 
-    /* MENU */
-    nav {
-      background: #388e3c;
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      padding: 15px 0;
-    }
+nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+}
 
-    nav a {
-      color: #fff;
-      text-decoration: none;
-      font-weight: bold;
-      padding: 8px 15px;
-      border-radius: 5px;
-      transition: transform .3s, background .3s;
-    }
+section {
+  padding: 30px 20px;
+  max-width: 900px;
+  margin: auto;
+}
 
-    nav a:hover {
-      background: #2e7d32;
-      transform: translateY(-4px);
-    }
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
 
-    section {
-      padding: 30px 20px;
-      max-width: 900px;
-      margin: auto;
-    }
+.card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 3px 6px rgba(0,0,0,.15);
+  transition: transform .3s;
+}
 
-    /* CARDÁPIO */
-    .menu-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-    }
+.card:hover {
+  transform: translateY(-5px);
+}
 
-    .card {
-      background: #ffffff;
-      border-radius: 8px;
-      padding: 20px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      transition: transform .3s;
-    }
+.card h3 {
+  color: #d32f2f;
+}
 
-    .card:hover {
-      transform: translateY(-6px);
-    }
+.price {
+  font-weight: bold;
+}
 
-    .card h3 {
-      margin-top: 0;
-      color: #d32f2f;
-    }
+.card button {
+  margin-top: 10px;
+  padding: 10px;
+  background: #d32f2f;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
 
-    .price {
-      font-weight: bold;
-    }
+.card button:hover {
+  background: #b71c1c;
+}
 
-    .card button {
-      margin-top: 10px;
-      padding: 10px 15px;
-      background: #d32f2f;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
+/* CARRINHO */
+#carrinho {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #ffffff;
+  width: 280px;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0,0,0,.25);
+  display: none;
+}
 
-    .card button:hover {
-      background: #b71c1c;
-    }
+#carrinho h3 {
+  margin-top: 0;
+  color: #388e3c;
+}
 
-    /* RODAPÉ */
-    footer {
-      background: #388e3c;
-      color: #fff;
-      text-align: center;
-      padding: 25px;
-      margin-top: 40px;
-    }
+.item-carrinho {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
 
-    footer img {
-      width: 32px;
-      margin: 0 10px;
-      transition: transform .3s;
-    }
+.remover {
+  cursor: pointer;
+  color: red;
+}
 
-    footer img:hover {
-      transform: translateY(-5px);
-    }
-  </style>
+#finalizar {
+  width: 100%;
+  padding: 10px;
+  background: #25d366;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* SOCIAL */
+.social {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  margin-top: 20px;
+}
+
+.social img {
+  width: 45px;
+  transition: transform .3s;
+}
+
+.social img:hover {
+  transform: scale(1.15);
+}
+
+footer {
+  background: #388e3c;
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+}
+</style>
 </head>
 
 <body>
 
 <header>
-  <img src="logo.png" alt="Cantinho da Villa">
   <h1>Cantinho da Villa</h1>
-  <p><strong>Sabor que abraça 😋</strong></p>
+  <p>Sabor que abraça 😋</p>
 </header>
 
 <nav>
@@ -136,92 +163,120 @@
 </nav>
 
 <section id="hamburgueres">
-  <h2>🍔 Hambúrgueres</h2>
-  <div class="menu-grid">
-    <div class="card">
-      <h3>X-Burger</h3>
-      Pão, hambúrguer, queijo e molho especial
-      <p class="price">R$ 12,00</p>
-      <button>Adicionar ao carrinho</button>
-    </div>
-
-    <div class="card">
-      <h3>X-Salada</h3>
-      Hambúrguer, queijo, alface e tomate
-      <p class="price">R$ 15,00</p>
-      <button>Adicionar ao carrinho</button>
-    </div>
+<h2>🍔 Hambúrgueres</h2>
+<div class="menu-grid">
+  <div class="card">
+    <h3>X-Burger</h3>
+    Pão, hambúrguer e queijo
+    <p class="price">R$ 12,00</p>
+    <button onclick="add('X-Burger',12)">Adicionar</button>
   </div>
+
+  <div class="card">
+    <h3>X-Salada</h3>
+    Hambúrguer, queijo, alface e tomate
+    <p class="price">R$ 15,00</p>
+    <button onclick="add('X-Salada',15)">Adicionar</button>
+  </div>
+</div>
 </section>
 
 <section id="hotdogs">
-  <h2>🌭 Hot Dogs</h2>
-  <div class="menu-grid">
-    <div class="card">
-      <h3>Hot Dog Tradicional</h3>
-      Salsicha, molho, mostarda e ketchup
-      <p class="price">R$ 10,00</p>
-      <button>Adicionar ao carrinho</button>
-    </div>
-
-    <div class="card">
-      <h3>Hot Dog de Pote</h3>
-      Salsicha, purê, milho, batata palha
-      <p class="price">R$ 14,00</p>
-      <button>Adicionar ao carrinho</button>
-    </div>
+<h2>🌭 Hot Dogs</h2>
+<div class="menu-grid">
+  <div class="card">
+    <h3>Hot Dog de Pote</h3>
+    Salsicha, purê, batata palha
+    <p class="price">R$ 14,00</p>
+    <button onclick="add('Hot Dog de Pote',14)">Adicionar</button>
   </div>
+</div>
 </section>
 
 <section id="bebidas">
-  <h2>🥤 Bebidas</h2>
-  <div class="menu-grid">
-    <div class="card">
-      <h3>Refrigerante Lata</h3>
-      Coca, Guaraná ou Fanta
-      <p class="price">R$ 5,00</p>
-      <button>Adicionar ao carrinho</button>
-    </div>
-
-    <div class="card">
-      <h3>Suco Natural</h3>
-      Laranja, limão ou abacaxi
-      <p class="price">R$ 6,00</p>
-      <button>Adicionar ao carrinho</button>
-    </div>
+<h2>🥤 Bebidas</h2>
+<div class="menu-grid">
+  <div class="card">
+    <h3>Refrigerante Lata</h3>
+    Coca, Fanta ou Guaraná
+    <p class="price">R$ 5,00</p>
+    <button onclick="add('Refrigerante Lata',5)">Adicionar</button>
   </div>
+</div>
 </section>
 
 <section id="combos">
-  <h2>🎁 Combos</h2>
-  <div class="menu-grid">
-    <div class="card">
-      <h3>Combo X-Burger</h3>
-      X-Burger + Batata + Refrigerante
-      <p class="price">R$ 18,00</p>
-      <button>Adicionar ao carrinho</button>
-    </div>
-
-    <div class="card">
-      <h3>Combo Hot Dog</h3>
-      Hot Dog + Batata + Suco
-      <p class="price">R$ 16,00</p>
-      <button>Adicionar ao carrinho</button>
-    </div>
+<h2>🎁 Combos</h2>
+<div class="menu-grid">
+  <div class="card">
+    <h3>Combo Villa</h3>
+    X-Burger + Refri
+    <p class="price">R$ 17,00</p>
+    <button onclick="add('Combo Villa',17)">Adicionar</button>
   </div>
+</div>
 </section>
 
+<!-- CARRINHO -->
+<div id="carrinho">
+  <h3>🛒 Seu Pedido</h3>
+  <div id="itens"></div>
+  <p><strong>Total: R$ <span id="total">0</span></strong></p>
+  <button id="finalizar" onclick="finalizar()">Finalizar no WhatsApp</button>
+</div>
+
 <footer>
-  <p>© 2026 Cantinho da Villa • Todos os direitos reservados</p>
-  <div>
+  <p>Siga a gente</p>
+  <div class="social">
     <a href="https://instagram.com/cantinho_da_villazs" target="_blank">
-      <img src="instagram-icon.png" alt="Instagram">
+      <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png">
     </a>
     <a href="https://wa.me/5511913533982" target="_blank">
-      <img src="whatsapp-icon.png" alt="WhatsApp">
+      <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png">
     </a>
   </div>
 </footer>
+
+<script>
+let carrinho = [];
+
+function add(nome, preco){
+  carrinho.push({nome, preco});
+  atualizar();
+}
+
+function remover(index){
+  carrinho.splice(index,1);
+  atualizar();
+}
+
+function atualizar(){
+  let box = document.getElementById("carrinho");
+  let itens = document.getElementById("itens");
+  let total = 0;
+
+  itens.innerHTML = "";
+  carrinho.forEach((item,i)=>{
+    total += item.preco;
+    itens.innerHTML += `
+      <div class="item-carrinho">
+        ${item.nome} - R$${item.preco}
+        <span class="remover" onclick="remover(${i})">✖</span>
+      </div>`;
+  });
+
+  document.getElementById("total").innerText = total;
+  box.style.display = carrinho.length ? "block" : "none";
+}
+
+function finalizar(){
+  let msg = "Pedido Cantinho da Villa:%0A";
+  carrinho.forEach(i => msg += `- ${i.nome} (R$${i.preco})%0A`);
+  msg += `%0ATotal: R$ ${document.getElementById("total").innerText}`;
+
+  window.open(`https://wa.me/5511913533982?text=${msg}`);
+}
+</script>
 
 </body>
 </html>
