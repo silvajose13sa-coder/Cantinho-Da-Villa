@@ -9,8 +9,16 @@
 body{
   margin:0;
   font-family:Arial, sans-serif;
-  background:url("img/fundo-villa.jpg") no-repeat center top;
-  background-size:cover;
+  background:#000;
+}
+
+/* FUNDO FUNCIONAL MOBILE */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:url("img/fundo-villa.jpg") center/cover no-repeat;
+  z-index:-1;
 }
 
 header{
@@ -28,7 +36,6 @@ header{
   background:#fff;
   border-radius:10px;
   padding:15px;
-  padding-bottom:280px;
 }
 
 .btn{
@@ -49,21 +56,41 @@ header{
   margin-bottom:10px;
 }
 
-.cart{
-  position:sticky;
-  bottom:0;
-  background:#fff;
-  border-top:3px solid #c40000;
-  padding:10px;
+/* BOTÃO CARRINHO */
+.cart-btn{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:#c40000;
+  color:#fff;
+  border-radius:50%;
+  width:60px;
+  height:60px;
+  font-size:26px;
+  border:none;
 }
 
-input, textarea{
-  width:100%;
-  padding:10px;
-  margin:6px 0;
+/* MODAL CARRINHO */
+.cart-modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.6);
+  display:none;
+}
+
+.cart{
+  background:#fff;
+  margin:60px auto;
+  max-width:500px;
+  padding:15px;
+  border-radius:10px;
 }
 
 .hidden{display:none;}
+
+.qty button{
+  padding:4px 10px;
+}
 </style>
 </head>
 
@@ -72,7 +99,6 @@ input, textarea{
 <header>🍔 Cantinho da Villa 🌭</header>
 
 <div class="container">
-
 <h3>Escolha uma categoria</h3>
 <button class="btn" onclick="openCat('burgers')">🍔 Hambúrguer</button>
 <button class="btn" onclick="openCat('hotdogs')">🌭 Hot Dog</button>
@@ -80,102 +106,95 @@ input, textarea{
 <button class="btn" onclick="openCat('combos')">🎁 Combos</button>
 
 <div id="menu"></div>
-
 </div>
 
-<div class="cart">
-<h3>🛒 Carrinho</h3>
-<div id="cartItems"></div>
+<button class="cart-btn" onclick="openCart()">🛒</button>
 
-<label><input type="checkbox" onchange="toggleExtra(2)"> + Queijo (R$2)</label><br>
-<label><input type="checkbox" onchange="toggleExtra(3)"> + Bacon (R$3)</label>
+<div class="cart-modal" id="cartModal">
+  <div class="cart">
+    <h3>Carrinho</h3>
+    <div id="cartItems"></div>
 
-<p>Taxa de entrega: R$3,50</p>
-<h3>Total: R$ <span id="total">0.00</span></h3>
+    <h4>Adicionais</h4>
+    Queijo: 
+    <div class="qty">
+      <button onclick="extra('cheese',-1)">-</button>
+      <span id="cheese">0</span>
+      <button onclick="extra('cheese',1)">+</button>
+    </div>
 
-<input id="name" placeholder="Seu nome">
-<input id="address" placeholder="Endereço completo">
-<textarea id="obs" placeholder="Observações"></textarea>
+    Bacon:
+    <div class="qty">
+      <button onclick="extra('bacon',-1)">-</button>
+      <span id="bacon">0</span>
+      <button onclick="extra('bacon',1)">+</button>
+    </div>
 
-<button class="btn" onclick="finish()">Finalizar Pedido</button>
-<button class="btn" onclick="openAdmin()">Painel do Dono</button>
-</div>
+    <p>Taxa: R$3,50</p>
+    <h3>Total: R$ <span id="total">0.00</span></h3>
 
-<!-- PAINEL DONO -->
-<div id="admin" class="container hidden">
-<h3>Painel do Dono</h3>
-<input id="adminPass" placeholder="Senha">
-<button class="btn" onclick="checkAdmin()">Entrar</button>
-<pre id="orders"></pre>
+    <input id="name" placeholder="Seu nome">
+    <input id="address" placeholder="Endereço completo">
+    <textarea id="obs" placeholder="Observações"></textarea>
+
+    <button class="btn" onclick="finish()">Finalizar Pedido</button>
+    <button class="btn" onclick="closeCart()">Fechar</button>
+  </div>
 </div>
 
 <script>
-const data = {
- burgers:[
-  ["X-Burger",12],["X-Salada",14],["X-Bacon",16],["X-Tudo",18],["X-Frango",15]
- ],
- hotdogs:[
-  ["Simples",8],["Duplo",10],["Bacon",12],["Completo",14],["Especial",15]
- ],
- drinks:[
-  ["Coca-Cola",5],["Fanta",5],["Guaraná",5],["Suco",6],["Água",3]
- ],
- combos:[
-  ["Combo 1",20],["Combo 2",25],["Combo 3",28],["Combo 4",30],["Combo 5",35]
- ]
+const phone = "5511999999999"; // 🔴 COLOQUE SEU NÚMERO AQUI
+
+const data={
+ burgers:[["X-Burger",12],["X-Salada",14],["X-Bacon",16],["X-Tudo",18],["X-Frango",15]],
+ hotdogs:[["Simples",8],["Duplo",10],["Bacon",12],["Completo",14],["Especial",15]],
+ drinks:[["Coca",5],["Fanta",5],["Guaraná",5],["Suco",6],["Água",3]],
+ combos:[["Combo 1",20],["Combo 2",25],["Combo 3",28],["Combo 4",30],["Combo 5",35]]
 };
 
-let cart=[], extras=0;
+let cart=[], extras={cheese:0,bacon:0};
 
 function openCat(cat){
- let html='';
- data[cat].forEach(i=>{
-  html+=`
-  <div class="card">
-   <b>${i[0]}</b> - R$${i[1]}<br>
+ let h="";
+ data[cat].forEach((i,idx)=>{
+  h+=`<div class="card">
+   <b>${i[0]}</b> - R$${i[1]}
    <button onclick="add('${i[0]}',${i[1]})">Adicionar</button>
   </div>`;
  });
- document.getElementById("menu").innerHTML=html;
+ menu.innerHTML=h;
 }
 
-function add(name,price){
- cart.push({name,price});
- render();
-}
+function add(n,p){cart.push({n,p});render();}
 
-function toggleExtra(v){
- extras += event.target.checked ? v : -v;
+function remove(i){cart.splice(i,1);render();}
+
+function extra(t,v){
+ extras[t]=Math.max(0,extras[t]+v);
  render();
 }
 
 function render(){
- let html='';
- let total=extras+3.5;
- cart.forEach(i=>{
-  html+=`• ${i.name}<br>`;
-  total+=i.price;
+ let h="",total=3.5+extras.cheese*2+extras.bacon*3;
+ cart.forEach((i,idx)=>{
+  h+=`• ${i.n} <button onclick="remove(${idx})">🗑</button><br>`;
+  total+=i.p;
  });
- document.getElementById("cartItems").innerHTML=html || "Carrinho vazio";
- document.getElementById("total").innerText=total.toFixed(2);
+ cartItems.innerHTML=h||"Vazio";
+ cheese.innerText=extras.cheese;
+ bacon.innerText=extras.bacon;
+ totalEl.innerText=total.toFixed(2);
 }
+
+function openCart(){cartModal.style.display="block";}
+function closeCart(){cartModal.style.display="none";}
 
 function finish(){
- if(!cart.length) return alert("Carrinho vazio");
  let msg="PEDIDO%0A";
- cart.forEach(i=>msg+=`- ${i.name}%0A`);
- msg+=`Extras: R$${extras}%0ATaxa: R$3,50%0ATotal: R$${document.getElementById("total").innerText}`;
+ cart.forEach(i=>msg+=`- ${i.n}%0A`);
+ msg+=`Queijo: ${extras.cheese}%0ABacon: ${extras.bacon}%0ATotal: R$${total.innerText}`;
  msg+=`%0ANome: ${name.value}%0AEndereço: ${address.value}%0AObs: ${obs.value}`;
- window.open("https://wa.me/55SEUNUMERO?text="+msg);
-}
-
-function openAdmin(){
- document.getElementById("admin").classList.remove("hidden");
-}
-
-function checkAdmin(){
- if(adminPass.value!=="s@Samuel2018") return alert("Senha incorreta");
- orders.innerText="Pedidos ativos apenas enquanto a página está aberta.";
+ window.open(`https://wa.me/${phone}?text=${msg}`);
 }
 </script>
 
