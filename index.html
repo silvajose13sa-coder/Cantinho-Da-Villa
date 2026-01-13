@@ -2,136 +2,84 @@
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<title>Cantinho da Villa 🍔</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cantinho da Villa</title>
 
 <style>
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: url('https://i.imgur.com/3YQZQZB.jpg') no-repeat center center fixed;
-  background-size: cover;
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:url("img/fundo-villa.jpg") no-repeat center top;
+  background-size:cover;
 }
 
-header {
-  background: rgba(200,0,0,0.9);
-  color: white;
-  padding: 15px;
-  text-align: center;
-  font-size: 22px;
-  font-weight: bold;
+header{
+  background:#c40000;
+  color:#fff;
+  padding:15px;
+  text-align:center;
+  font-size:22px;
+  font-weight:bold;
 }
 
-.container {
-  background: rgba(255,255,255,0.95);
-  margin: 10px;
-  padding: 10px;
-  border-radius: 10px;
+.container{
+  max-width:500px;
+  margin:20px auto;
+  background:#fff;
+  border-radius:10px;
+  padding:15px;
+  padding-bottom:280px;
 }
 
-button {
-  width: 100%;
-  padding: 12px;
-  margin: 5px 0;
-  background: #e60000;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  cursor: pointer;
+.btn{
+  width:100%;
+  padding:14px;
+  margin:8px 0;
+  border:none;
+  border-radius:8px;
+  background:#c40000;
+  color:#fff;
+  font-size:18px;
 }
 
-button:hover {
-  background: #c00000;
+.card{
+  border:1px solid #ddd;
+  border-radius:8px;
+  padding:10px;
+  margin-bottom:10px;
 }
 
-.item {
-  border-bottom: 1px solid #ddd;
-  padding: 8px 0;
+.cart{
+  position:sticky;
+  bottom:0;
+  background:#fff;
+  border-top:3px solid #c40000;
+  padding:10px;
 }
 
-.cart {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: #fff;
-  border-top: 2px solid #e60000;
-  padding: 10px;
+input, textarea{
+  width:100%;
+  padding:10px;
+  margin:6px 0;
 }
 
-.cart h3 {
-  margin: 5px 0;
-}
-
-.hidden {
-  display: none;
-}
-
-input, textarea {
-  width: 100%;
-  padding: 8px;
-  margin: 5px 0;
-}
-
-.admin {
-  background: #111;
-  color: white;
-  padding: 10px;
-  margin-top: 10px;
-  border-radius: 8px;
-}
+.hidden{display:none;}
 </style>
 </head>
 
 <body>
 
-<header>Cantinho da Villa 🍔🌭</header>
+<header>🍔 Cantinho da Villa 🌭</header>
 
-<div class="container" id="menu">
+<div class="container">
 
-<h2>Escolha uma categoria</h2>
+<h3>Escolha uma categoria</h3>
+<button class="btn" onclick="openCat('burgers')">🍔 Hambúrguer</button>
+<button class="btn" onclick="openCat('hotdogs')">🌭 Hot Dog</button>
+<button class="btn" onclick="openCat('drinks')">🥤 Bebidas</button>
+<button class="btn" onclick="openCat('combos')">🎁 Combos</button>
 
-<button onclick="showCategory('hamburguer')">🍔 Hambúrguer</button>
-<button onclick="showCategory('hotdog')">🌭 Hot Dog</button>
-<button onclick="showCategory('bebidas')">🥤 Bebidas</button>
-<button onclick="showCategory('combos')">🎁 Combos</button>
-
-<div id="hamburguer" class="hidden">
-<h3>🍔 Hambúrguer</h3>
-<div class="item"><button onclick="addItem('Hambúrguer Simples',12)">Hambúrguer Simples - R$12</button></div>
-<div class="item"><button onclick="addItem('Hambúrguer Duplo',16)">Hambúrguer Duplo - R$16</button></div>
-<div class="item"><button onclick="addItem('Hambúrguer Bacon',18)">Hambúrguer Bacon - R$18</button></div>
-<div class="item"><button onclick="addItem('Hambúrguer Cheddar',18)">Hambúrguer Cheddar - R$18</button></div>
-<div class="item"><button onclick="addItem('Hambúrguer Villa',22)">Hambúrguer Villa - R$22</button></div>
-</div>
-
-<div id="hotdog" class="hidden">
-<h3>🌭 Hot Dog</h3>
-<button onclick="addItem('Hot Dog Simples',10)">Hot Dog Simples - R$10</button>
-<button onclick="addItem('Hot Dog Duplo',14)">Hot Dog Duplo - R$14</button>
-<button onclick="addItem('Hot Dog Bacon',16)">Hot Dog Bacon - R$16</button>
-<button onclick="addItem('Hot Dog Cheddar',16)">Hot Dog Cheddar - R$16</button>
-<button onclick="addItem('Hot Dog Villa',18)">Hot Dog Villa - R$18</button>
-</div>
-
-<div id="bebidas" class="hidden">
-<h3>🥤 Bebidas</h3>
-<button onclick="addItem('Refrigerante Lata',6)">Refrigerante Lata - R$6</button>
-<button onclick="addItem('Refrigerante 600ml',8)">Refrigerante 600ml - R$8</button>
-<button onclick="addItem('Refrigerante 2L',12)">Refrigerante 2L - R$12</button>
-<button onclick="addItem('Suco Natural',7)">Suco Natural - R$7</button>
-<button onclick="addItem('Água',4)">Água - R$4</button>
-</div>
-
-<div id="combos" class="hidden">
-<h3>🎁 Combos</h3>
-<button onclick="addItem('Combo Vila',28)">Combo Vila - R$28</button>
-<button onclick="addItem('Combo Duplo',32)">Combo Duplo - R$32</button>
-<button onclick="addItem('Combo Bacon',35)">Combo Bacon - R$35</button>
-<button onclick="addItem('Combo Casal',40)">Combo Casal - R$40</button>
-<button onclick="addItem('Combo Família',55)">Combo Família - R$55</button>
-</div>
+<div id="menu"></div>
 
 </div>
 
@@ -139,89 +87,95 @@ input, textarea {
 <h3>🛒 Carrinho</h3>
 <div id="cartItems"></div>
 
-<label><input type="checkbox" onclick="toggleExtra('Queijo',2)"> + Queijo (R$2)</label><br>
-<label><input type="checkbox" onclick="toggleExtra('Bacon',3)"> + Bacon (R$3)</label>
+<label><input type="checkbox" onchange="toggleExtra(2)"> + Queijo (R$2)</label><br>
+<label><input type="checkbox" onchange="toggleExtra(3)"> + Bacon (R$3)</label>
 
-<p><strong>Taxa de entrega:</strong> R$3,50</p>
-<p><strong>Total:</strong> R$ <span id="total">0</span></p>
+<p>Taxa de entrega: R$3,50</p>
+<h3>Total: R$ <span id="total">0.00</span></h3>
 
 <input id="name" placeholder="Seu nome">
-<textarea id="address" placeholder="Endereço completo"></textarea>
+<input id="address" placeholder="Endereço completo">
+<textarea id="obs" placeholder="Observações"></textarea>
 
-<button onclick="sendWhats()">Finalizar Pedido</button>
-
-<button onclick="openAdmin()">Painel do Dono</button>
-
-<div id="adminPanel" class="admin hidden">
-<h3>Painel do Dono</h3>
-<input id="adminPass" type="password" placeholder="Senha">
-<button onclick="checkAdmin()">Entrar</button>
-<pre id="orders"></pre>
+<button class="btn" onclick="finish()">Finalizar Pedido</button>
+<button class="btn" onclick="openAdmin()">Painel do Dono</button>
 </div>
+
+<!-- PAINEL DONO -->
+<div id="admin" class="container hidden">
+<h3>Painel do Dono</h3>
+<input id="adminPass" placeholder="Senha">
+<button class="btn" onclick="checkAdmin()">Entrar</button>
+<pre id="orders"></pre>
 </div>
 
 <script>
-let cart = [];
-let extras = [];
-let total = 0;
-const taxa = 3.5;
+const data = {
+ burgers:[
+  ["X-Burger",12],["X-Salada",14],["X-Bacon",16],["X-Tudo",18],["X-Frango",15]
+ ],
+ hotdogs:[
+  ["Simples",8],["Duplo",10],["Bacon",12],["Completo",14],["Especial",15]
+ ],
+ drinks:[
+  ["Coca-Cola",5],["Fanta",5],["Guaraná",5],["Suco",6],["Água",3]
+ ],
+ combos:[
+  ["Combo 1",20],["Combo 2",25],["Combo 3",28],["Combo 4",30],["Combo 5",35]
+ ]
+};
 
-function showCategory(id){
-  document.querySelectorAll('#menu > div').forEach(d => d.classList.add('hidden'));
-  document.getElementById(id).classList.remove('hidden');
+let cart=[], extras=0;
+
+function openCat(cat){
+ let html='';
+ data[cat].forEach(i=>{
+  html+=`
+  <div class="card">
+   <b>${i[0]}</b> - R$${i[1]}<br>
+   <button onclick="add('${i[0]}',${i[1]})">Adicionar</button>
+  </div>`;
+ });
+ document.getElementById("menu").innerHTML=html;
 }
 
-function addItem(name, price){
-  cart.push({name, price});
-  updateCart();
+function add(name,price){
+ cart.push({name,price});
+ render();
 }
 
-function toggleExtra(name, price){
-  const i = extras.findIndex(e => e.name === name);
-  if(i >= 0) extras.splice(i,1);
-  else extras.push({name, price});
-  updateCart();
+function toggleExtra(v){
+ extras += event.target.checked ? v : -v;
+ render();
 }
 
-function updateCart(){
-  const c = document.getElementById('cartItems');
-  c.innerHTML = '';
-  total = 0;
-
-  cart.forEach(i => {
-    c.innerHTML += `<div>${i.name} - R$${i.price}</div>`;
-    total += i.price;
-  });
-
-  extras.forEach(e => {
-    c.innerHTML += `<div>+ ${e.name} - R$${e.price}</div>`;
-    total += e.price;
-  });
-
-  total += taxa;
-  document.getElementById('total').innerText = total.toFixed(2);
+function render(){
+ let html='';
+ let total=extras+3.5;
+ cart.forEach(i=>{
+  html+=`• ${i.name}<br>`;
+  total+=i.price;
+ });
+ document.getElementById("cartItems").innerHTML=html || "Carrinho vazio";
+ document.getElementById("total").innerText=total.toFixed(2);
 }
 
-function sendWhats(){
-  const name = document.getElementById('name').value;
-  const addr = document.getElementById('address').value;
-  let msg = `Pedido Cantinho da Villa%nNome: ${name}%nEndereço: ${addr}%n%n`;
-
-  cart.forEach(i => msg += `- ${i.name}%n`);
-  extras.forEach(e => msg += `+ ${e.name}%n`);
-  msg += `%nTaxa: R$3,50%nTotal: R$${total.toFixed(2)}`;
-
-  window.open(`https://wa.me/55SEUNUMEROAQUI?text=${msg}`);
+function finish(){
+ if(!cart.length) return alert("Carrinho vazio");
+ let msg="PEDIDO%0A";
+ cart.forEach(i=>msg+=`- ${i.name}%0A`);
+ msg+=`Extras: R$${extras}%0ATaxa: R$3,50%0ATotal: R$${document.getElementById("total").innerText}`;
+ msg+=`%0ANome: ${name.value}%0AEndereço: ${address.value}%0AObs: ${obs.value}`;
+ window.open("https://wa.me/55SEUNUMERO?text="+msg);
 }
 
 function openAdmin(){
-  document.getElementById('adminPanel').classList.toggle('hidden');
+ document.getElementById("admin").classList.remove("hidden");
 }
 
 function checkAdmin(){
-  if(document.getElementById('adminPass').value === 's@Samuel2018'){
-    document.getElementById('orders').innerText = JSON.stringify(cart,null,2);
-  } else alert('Senha incorreta');
+ if(adminPass.value!=="s@Samuel2018") return alert("Senha incorreta");
+ orders.innerText="Pedidos ativos apenas enquanto a página está aberta.";
 }
 </script>
 
