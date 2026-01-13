@@ -6,76 +6,76 @@
 <title>Cantinho da Villa</title>
 
 <style>
-*{box-sizing:border-box}
+*{box-sizing:border-box;margin:0;padding:0}
 body{
-  margin:0;
-  font-family:Arial, Helvetica, sans-serif;
+  font-family:Arial,Helvetica,sans-serif;
   background:#fff8e1;
 }
 
 /* TOPO */
 header{
   background:url("img/vila-topo.jpg") center/cover no-repeat;
+  color:#fff;
+}
+header .overlay{
+  background:rgba(0,0,0,.6);
   text-align:center;
-  padding:60px 20px;
-  color:#fff;
-}
-header img{width:140px}
-header h1{text-shadow:2px 2px 5px #000}
-
-/* MENU */
-nav{
-  background:#2e7d32;
-  display:flex;
-  justify-content:center;
-  gap:20px;
-  padding:15px;
-}
-nav a{
-  color:#fff;
-  text-decoration:none;
-  font-weight:bold;
-}
-
-/* FUNDO CARDÁPIO */
-.menu-bg{
-  background:url("img/restaurante.webp") center/cover no-repeat;
   padding:40px 15px;
 }
+header img{
+  width:120px;
+  margin-bottom:10px;
+}
+header h1{margin-bottom:5px}
 
-/* SEÇÕES */
-section{
-  background:rgba(255,255,255,.95);
-  max-width:1000px;
-  margin:20px auto;
-  padding:20px;
-  border-radius:12px;
+/* FUNDO CARDÁPIO */
+.fundo{
+  background:url("img/restaurante.webp") center/cover fixed no-repeat;
+  padding-bottom:280px;
 }
 
-h2{text-align:center;color:#b71c1c}
-
-/* GRID */
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:15px;
-}
-
-.card{
+/* CATEGORIAS */
+.categorias{
+  display:flex;
+  justify-content:center;
+  gap:10px;
   background:#fff;
   padding:15px;
-  border-radius:10px;
-  box-shadow:0 2px 6px rgba(0,0,0,.2);
+  position:sticky;
+  top:0;
+  z-index:10;
 }
-
-.card button{
-  width:100%;
-  margin-top:10px;
-  padding:10px;
+.categorias button{
+  padding:10px 15px;
   border:none;
+  border-radius:8px;
   background:#d32f2f;
   color:#fff;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+/* PRODUTOS */
+#produtos{
+  max-width:900px;
+  margin:20px auto;
+  background:rgba(255,255,255,.95);
+  border-radius:12px;
+  padding:20px;
+}
+.card{
+  border-bottom:1px solid #ddd;
+  padding:10px 0;
+}
+.card:last-child{border:none}
+.card button{
+  margin-top:5px;
+  background:#2e7d32;
+  color:#fff;
+  border:none;
+  padding:8px;
   border-radius:6px;
+  cursor:pointer;
 }
 
 /* CARRINHO */
@@ -84,23 +84,33 @@ h2{text-align:center;color:#b71c1c}
   bottom:10px;
   left:50%;
   transform:translateX(-50%);
-  background:#fff;
   width:95%;
   max-width:380px;
-  padding:15px;
+  background:#fff;
   border-radius:12px;
-  box-shadow:0 6px 20px rgba(0,0,0,.4);
+  box-shadow:0 5px 20px rgba(0,0,0,.3);
+  padding:15px;
   z-index:9999;
 }
-
-#carrinho ul{padding:0;list-style:none;max-height:120px;overflow:auto}
-#carrinho li{margin-bottom:5px}
-
-/* FORM */
-input, textarea{
+#carrinho ul{
+  list-style:none;
+  max-height:120px;
+  overflow:auto;
+}
+#carrinho li{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:5px;
+}
+#finalizar{
+  background:#25D366;
   width:100%;
-  padding:8px;
-  margin-top:5px;
+  padding:10px;
+  border:none;
+  border-radius:8px;
+  color:#fff;
+  font-weight:bold;
+  margin-top:10px;
 }
 
 /* FOOTER */
@@ -108,86 +118,97 @@ footer{
   background:#2e7d32;
   color:#fff;
   text-align:center;
-  padding:25px;
+  padding:30px;
 }
-footer img{width:40px;margin:10px}
+footer img{
+  width:40px;
+  margin:0 10px;
+}
 </style>
 </head>
 
 <body>
 
 <header>
-  <img src="logo.png">
-  <h1>Cantinho da Villa</h1>
-  <p>Sabor que abraça 😋</p>
+  <div class="overlay">
+    <img src="img/logo.png">
+    <h1>Cantinho da Villa</h1>
+    <p>Sabor que abraça 😋</p>
+  </div>
 </header>
 
-<nav>
-  <a href="#hamburguer">🍔 Hambúrguer</a>
-  <a href="#hotdog">🌭 Hot Dog</a>
-  <a href="#bebidas">🥤 Bebidas</a>
-</nav>
+<div class="fundo">
 
-<div class="menu-bg">
-
-<section id="hamburguer">
-<h2>Hambúrgueres</h2>
-<div class="grid">
-  <div class="card"><h3>X-Burger</h3>R$ 12<button onclick="add('X-Burger',12)">Adicionar</button></div>
-  <div class="card"><h3>X-Salada</h3>R$ 15<button onclick="add('X-Salada',15)">Adicionar</button></div>
-  <div class="card"><h3>X-Bacon</h3>R$ 18<button onclick="add('X-Bacon',18)">Adicionar</button></div>
-  <div class="card"><h3>X-Tudo</h3>R$ 22<button onclick="add('X-Tudo',22)">Adicionar</button></div>
-  <div class="card"><h3>X-Frango</h3>R$ 17<button onclick="add('X-Frango',17)">Adicionar</button></div>
+<div class="categorias">
+  <button onclick="abrir('hamburguer')">🍔 Hambúrguer</button>
+  <button onclick="abrir('hotdog')">🌭 Hot Dog</button>
+  <button onclick="abrir('bebidas')">🥤 Bebidas</button>
 </div>
-</section>
 
-<section id="hotdog">
-<h2>Hot Dogs</h2>
-<div class="grid">
-  <div class="card"><h3>Tradicional</h3>R$ 10<button onclick="add('Hot Dog Tradicional',10)">Adicionar</button></div>
-  <div class="card"><h3>Especial</h3>R$ 14<button onclick="add('Hot Dog Especial',14)">Adicionar</button></div>
-  <div class="card"><h3>Duplo</h3>R$ 16<button onclick="add('Hot Dog Duplo',16)">Adicionar</button></div>
-  <div class="card"><h3>Bacon</h3>R$ 18<button onclick="add('Hot Dog Bacon',18)">Adicionar</button></div>
-  <div class="card"><h3>Completo</h3>R$ 20<button onclick="add('Hot Dog Completo',20)">Adicionar</button></div>
-</div>
-</section>
-
-<section id="bebidas">
-<h2>Bebidas</h2>
-<div class="grid">
-  <div class="card"><h3>Coca-Cola</h3>R$ 5<button onclick="add('Coca-Cola',5)">Adicionar</button></div>
-  <div class="card"><h3>Guaraná</h3>R$ 5<button onclick="add('Guaraná',5)">Adicionar</button></div>
-  <div class="card"><h3>Fanta</h3>R$ 5<button onclick="add('Fanta',5)">Adicionar</button></div>
-  <div class="card"><h3>Suco</h3>R$ 6<button onclick="add('Suco',6)">Adicionar</button></div>
-  <div class="card"><h3>Água</h3>R$ 3<button onclick="add('Água',3)">Adicionar</button></div>
-</div>
-</section>
+<div id="produtos"></div>
 
 </div>
 
 <div id="carrinho">
-<h3>🛒 Pedido</h3>
+<h3>🛒 Carrinho</h3>
 <ul id="lista"></ul>
 <p><b>Total: R$ <span id="total">0</span></b></p>
 
-<input id="nome" placeholder="Seu nome">
-<input id="endereco" placeholder="Endereço">
-<textarea id="obs" placeholder="Observações"></textarea>
+<input id="nome" placeholder="Seu nome" style="width:100%;margin:5px 0">
+<input id="endereco" placeholder="Endereço" style="width:100%;margin:5px 0">
+<textarea id="obs" placeholder="Observações" style="width:100%"></textarea>
 
-<button onclick="finalizar()" style="background:#25D366;color:#fff;width:100%;padding:10px;border:none;border-radius:6px;">
-Finalizar no WhatsApp
-</button>
+<button id="finalizar" onclick="finalizar()">Finalizar no WhatsApp</button>
 </div>
 
 <footer>
-<a href="https://instagram.com/cantinho_da_villazs"><img src="img/instagram.jpg"></a>
-<a href="https://wa.me/5511913533982"><img src="img/whatsapp.webp"></a>
-<p>© 2026 Cantinho da Villa</p>
+<p>Siga a gente</p>
+<a href="https://instagram.com/cantinho_da_villazs" target="_blank">
+<img src="img/instagram.jpg">
+</a>
+<a href="https://wa.me/5511913533982" target="_blank">
+<img src="img/whatsapp.webp">
+</a>
 </footer>
 
 <script>
-let carrinho=[], total=0;
-const taxaEntrega=5;
+const dados={
+hamburguer:[
+{name:"X-Salada",preco:15},
+{name:"X-Bacon",preco:18},
+{name:"X-Tudo",preco:22},
+{name:"X-Calabresa",preco:17},
+{name:"X-Frango",preco:16}
+],
+hotdog:[
+{name:"Simples",preco:10},
+{name:"Completo",preco:14},
+{name:"Calabresa",preco:15},
+{name:"Bacon",preco:16},
+{name:"Especial",preco:18}
+],
+bebidas:[
+{name:"Coca-Cola",preco:5},
+{name:"Guaraná",preco:5},
+{name:"Fanta",preco:5},
+{name:"Suco",preco:6},
+{name:"Água",preco:3}
+]
+};
+
+let carrinho=[],total=0;
+
+function abrir(cat){
+  const p=document.getElementById("produtos");
+  p.innerHTML="<h2>"+cat.toUpperCase()+"</h2>";
+  dados[cat].forEach(i=>{
+    p.innerHTML+=`
+    <div class="card">
+      <b>${i.name}</b><br>R$ ${i.preco}
+      <button onclick="add('${i.name}',${i.preco})">Adicionar</button>
+    </div>`;
+  });
+}
 
 function add(nome,preco){
   carrinho.push({nome,preco});
@@ -196,20 +217,25 @@ function add(nome,preco){
 }
 
 function render(){
-  const lista=document.getElementById("lista");
-  lista.innerHTML="";
-  carrinho.forEach(i=>lista.innerHTML+=`<li>${i.nome}</li>`);
-  document.getElementById("total").innerText=(total+taxaEntrega).toFixed(2);
+  const l=document.getElementById("lista");
+  l.innerHTML="";
+  carrinho.forEach((i,n)=>{
+    l.innerHTML+=`<li>${i.nome}<button onclick="rem(${n})">X</button></li>`;
+  });
+  document.getElementById("total").innerText=total.toFixed(2);
+}
+
+function rem(i){
+  total-=carrinho[i].preco;
+  carrinho.splice(i,1);
+  render();
 }
 
 function finalizar(){
-  let nome=document.getElementById("nome").value;
-  let end=document.getElementById("endereco").value;
-  let obs=document.getElementById("obs").value;
-
-  let msg=`Pedido:%0ACliente: ${nome}%0AEndereço: ${end}%0A`;
+  let msg="Pedido Cantinho da Villa:%0A";
   carrinho.forEach(i=>msg+=`- ${i.nome}%0A`);
-  msg+=`Taxa: R$ ${taxaEntrega}%0ATotal: R$ ${(total+taxaEntrega).toFixed(2)}%0AObs: ${obs}`;
+  msg+=`Total: R$ ${total.toFixed(2)}%0A`;
+  msg+=`Nome: ${nome.value}%0AEndereço: ${endereco.value}%0AObs: ${obs.value}`;
   window.open(`https://wa.me/5511913533982?text=${msg}`);
 }
 </script>
