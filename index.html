@@ -13,9 +13,10 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   background: #fff8e1;
   color: #333;
+  overflow-x: hidden;
 }
 
-/* TOPO */
+/* ===== TOPO ===== */
 header {
   background: url("img/vila-topo.jpg") center/cover no-repeat;
   color: white;
@@ -25,20 +26,19 @@ header {
 
 header img {
   max-width: 160px;
-  margin-bottom: 10px;
 }
 
 header h1 {
-  margin: 10px 0 5px;
+  margin: 10px 0;
   text-shadow: 2px 2px 4px rgba(0,0,0,.6);
 }
 
-/* MENU */
+/* ===== MENU ===== */
 nav {
   background: #2e7d32;
   display: flex;
   justify-content: center;
-  gap: 20px;
+  gap: 15px;
   padding: 15px;
   flex-wrap: wrap;
 }
@@ -49,27 +49,21 @@ nav a {
   font-weight: bold;
   padding: 10px 18px;
   border-radius: 8px;
-  transition: transform .3s, background .3s;
 }
 
-nav a:hover {
-  background: #1b5e20;
-  transform: translateY(-6px);
-}
-
-/* FUNDO DO CARDÁPIO */
+/* ===== FUNDO DO CARDÁPIO ===== */
 .menu-bg {
   background: url("img/restaurante.webp") center/cover no-repeat;
-  padding: 40px 15px;
+  padding: 40px 20px;
 }
 
-/* SEÇÕES */
+/* ===== SEÇÕES ===== */
 section {
   max-width: 1000px;
-  margin: 40px auto;
+  margin: 30px auto;
   background: rgba(255,255,255,0.95);
   border-radius: 12px;
-  padding: 25px;
+  padding: 20px;
 }
 
 h2 {
@@ -77,20 +71,26 @@ h2 {
   text-align: center;
 }
 
-/* GRID */
+/* ===== GRID ===== */
 .menu-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px,1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
   gap: 20px;
-  margin-top: 20px;
 }
 
-/* CARD */
+/* ===== CARD ===== */
 .card {
   background: #fff;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0,0,0,.2);
+  cursor: pointer;
+  transition: transform .3s, box-shadow .3s;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 6px 14px rgba(0,0,0,.3);
 }
 
 .card h3 {
@@ -103,7 +103,7 @@ h2 {
   margin-top: 10px;
 }
 
-/* FOOTER */
+/* ===== FOOTER ===== */
 footer {
   background: #2e7d32;
   color: white;
@@ -135,58 +135,55 @@ footer img:hover {
   <a href="#hamburguer">🍔 Hambúrguer</a>
   <a href="#hotdog">🌭 Hot Dog</a>
   <a href="#bebidas">🥤 Bebidas</a>
-  <a href="#combos">🎁 Combos</a>
 </nav>
 
 <div class="menu-bg">
 
+<!-- ===== HAMBÚRGUER ===== -->
 <section id="hamburguer">
 <h2>Hambúrgueres</h2>
 <div class="menu-grid">
-  <div class="card">
+
+  <div class="card" onclick="pedido('X-Xisquinho', '15,00')">
     <h3>X-Xisquinho</h3>
-    <p>O X-tudo da vila</p>
+    O X-tudo da vila
     <p class="price">R$ 15,00</p>
   </div>
+
 </div>
 </section>
 
+<!-- ===== HOT DOG ===== -->
 <section id="hotdog">
 <h2>Hot Dogs</h2>
 <div class="menu-grid">
-  <div class="card">
+
+  <div class="card" onclick="pedido('Hot Dog de Pote', '12,00')">
     <h3>Hot Dog de Pote</h3>
-    <p>Clássico da vila</p>
+    Clássico da vila
     <p class="price">R$ 12,00</p>
   </div>
+
 </div>
 </section>
 
+<!-- ===== BEBIDAS ===== -->
 <section id="bebidas">
 <h2>Bebidas</h2>
 <div class="menu-grid">
-  <div class="card">
+
+  <div class="card" onclick="pedido('Refrigerante', '5,00')">
     <h3>Refrigerante</h3>
-    <p>Coca, Fanta ou Guaraná</p>
+    Coca, Fanta ou Guaraná
     <p class="price">R$ 5,00</p>
   </div>
 
-  <div class="card">
-    <h3>Suco</h3>
-    <p>Sabores disponíveis</p>
+  <div class="card" onclick="pedido('Suco Natural', '6,00')">
+    <h3>Suco Natural</h3>
+    Sabores variados
     <p class="price">R$ 6,00</p>
   </div>
-</div>
-</section>
 
-<section id="combos">
-<h2>Combos</h2>
-<div class="menu-grid">
-  <div class="card">
-    <h3>Combo Villa</h3>
-    <p>Lanche + bebida</p>
-    <p class="price">R$ 18,00</p>
-  </div>
 </div>
 </section>
 
@@ -195,13 +192,27 @@ footer img:hover {
 <footer>
 <p>Siga a gente</p>
 <a href="https://instagram.com/cantinho_da_villazs" target="_blank">
-  <img src="img/instagram.jpg" alt="Instagram">
+  <img src="img/intagram.jpg" alt="Instagram">
 </a>
 <a href="https://wa.me/5511913533982" target="_blank">
   <img src="img/whatsapp.webp" alt="WhatsApp">
 </a>
 <p>© 2026 Cantinho da Villa</p>
 </footer>
+
+<script>
+function pedido(nome, preco) {
+  const mensagem = 
+    `Olá! Quero fazer um pedido 😋%0A` +
+    `Produto: ${nome}%0A` +
+    `Valor: R$ ${preco}`;
+
+  window.open(
+    `https://wa.me/5511913533982?text=${mensagem}`,
+    "_blank"
+  );
+}
+</script>
 
 </body>
 </html>
