@@ -6,114 +6,110 @@
 <title>Cantinho da Villa</title>
 
 <style>
-* { box-sizing: border-box; }
-
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
   background: #fff8e1;
 }
 
-/* ===== TOPO ===== */
+/* HEADER */
 header {
   background: url("img/vila-topo.jpg") center/cover no-repeat;
-  color: white;
   text-align: center;
+  color: white;
   padding: 60px 20px;
 }
-
 header img {
-  max-width: 150px;
+  width: 140px;
 }
 
-/* ===== MENU ===== */
+/* MENU */
 nav {
   background: #2e7d32;
-  display: flex;
-  justify-content: center;
-  gap: 15px;
   padding: 15px;
+  text-align: center;
 }
-
 nav a {
   color: white;
   font-weight: bold;
+  margin: 0 10px;
   text-decoration: none;
 }
 
-/* ===== FUNDO ===== */
-.menu-bg {
-  background: url("img/restaurante.webp") center/cover no-repeat;
-  padding: 40px 15px;
-}
-
-/* ===== SEÇÕES ===== */
+/* CARDÁPIO */
 section {
-  max-width: 900px;
-  margin: auto;
-  background: rgba(255,255,255,.95);
-  border-radius: 12px;
-  padding: 20px;
-  display: none;
-}
-
-section.active {
-  display: block;
-}
-
-h2 {
-  text-align: center;
-  color: #b71c1c;
-}
-
-/* ===== GRID ===== */
-.menu-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
-  gap: 20px;
-}
-
-/* ===== CARD ===== */
-.card {
+  max-width: 1000px;
+  margin: 20px auto;
   background: white;
   padding: 20px;
+  border-radius: 12px;
+}
+.card {
+  background: #fff;
+  padding: 15px;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0,0,0,.2);
+  box-shadow: 0 3px 6px rgba(0,0,0,.2);
+  margin-bottom: 10px;
   cursor: pointer;
 }
 
-.card h3 {
-  margin-top: 0;
-  color: #d32f2f;
+/* MODAL */
+#modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.6);
+  z-index: 9999;
 }
-
-.price {
-  font-weight: bold;
+#modalContent {
+  background: white;
+  max-width: 350px;
+  margin: 10% auto;
+  padding: 20px;
+  border-radius: 12px;
 }
-
-/* ===== BOTÃO VOLTAR ===== */
-.voltar {
-  background: #2e7d32;
-  color: white;
-  border: none;
-  padding: 12px;
-  border-radius: 8px;
+input, textarea {
   width: 100%;
-  font-weight: bold;
-  margin-bottom: 20px;
+  margin-top: 8px;
+  padding: 8px;
 }
 
-/* ===== FOOTER ===== */
-footer {
-  background: #2e7d32;
+/* CARRINHO */
+#carrinho {
+  position: fixed;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  width: 95%;
+  max-width: 380px;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0,0,0,.4);
+  z-index: 999;
+}
+#carrinho ul {
+  list-style: none;
+  padding: 0;
+  max-height: 120px;
+  overflow-y: auto;
+}
+button {
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.btn-add {
+  background: #d32f2f;
   color: white;
-  text-align: center;
-  padding: 30px;
+  width: 100%;
 }
-
-footer img {
-  width: 40px;
-  margin: 10px;
+.btn-finalizar {
+  background: #25D366;
+  color: white;
+  width: 100%;
+  margin-top: 10px;
 }
 </style>
 </head>
@@ -123,98 +119,102 @@ footer img {
 <header>
   <img src="logo.png">
   <h1>Cantinho da Villa</h1>
-  <p>Sabor que abraça 😋</p>
 </header>
 
-<nav>
-  <a href="#" onclick="abrir('principal')">🏠 Início</a>
-</nav>
+<section>
+  <h2>🍔 Hambúrgueres</h2>
 
-<div class="menu-bg">
-
-<!-- ===== MENU PRINCIPAL ===== -->
-<section id="principal" class="active">
-<h2>Cardápio</h2>
-<div class="menu-grid">
-
-  <div class="card" onclick="abrir('hamburguer')">
-    <h3>🍔 Hambúrgueres</h3>
+  <div class="card" onclick="abrirModal('X-Burger',15)">
+    X-Burger – R$ 15,00
   </div>
 
-  <div class="card" onclick="abrir('hotdog')">
-    <h3>🌭 Hot Dogs</h3>
+  <div class="card" onclick="abrirModal('X-Bacon',18)">
+    X-Bacon – R$ 18,00
   </div>
+</section>
 
-  <div class="card" onclick="abrir('bebidas')">
-    <h3>🥤 Bebidas</h3>
+<!-- MODAL -->
+<div id="modal">
+  <div id="modalContent">
+    <h3 id="modalTitulo"></h3>
+
+    <label>Quantidade</label>
+    <input type="number" id="quantidade" value="1" min="1">
+
+    <label>Adicionais (+ R$ 3,00 cada)</label>
+    <label><input type="checkbox" value="Bacon"> Bacon</label><br>
+    <label><input type="checkbox" value="Queijo"> Queijo</label><br>
+    <label><input type="checkbox" value="Ovo"> Ovo</label>
+
+    <label>Observações</label>
+    <textarea id="obs" placeholder="Ex: sem cebola"></textarea>
+
+    <button class="btn-add" onclick="confirmarItem()">Adicionar</button>
+    <button onclick="fecharModal()">Cancelar</button>
   </div>
-
-</div>
-</section>
-
-<!-- ===== HAMBÚRGUER ===== -->
-<section id="hamburguer">
-<button class="voltar" onclick="abrir('principal')">⬅ Voltar</button>
-<h2>Hambúrgueres</h2>
-
-<div class="menu-grid">
-  <div class="card" onclick="pedido('X-Burger', '14,00')"><h3>X-Burger</h3><p class="price">R$ 14,00</p></div>
-  <div class="card" onclick="pedido('X-Salada', '16,00')"><h3>X-Salada</h3><p class="price">R$ 16,00</p></div>
-  <div class="card" onclick="pedido('X-Bacon', '18,00')"><h3>X-Bacon</h3><p class="price">R$ 18,00</p></div>
-  <div class="card" onclick="pedido('X-Tudo', '20,00')"><h3>X-Tudo</h3><p class="price">R$ 20,00</p></div>
-  <div class="card" onclick="pedido('X-Frango', '17,00')"><h3>X-Frango</h3><p class="price">R$ 17,00</p></div>
-</div>
-</section>
-
-<!-- ===== HOT DOG ===== -->
-<section id="hotdog">
-<button class="voltar" onclick="abrir('principal')">⬅ Voltar</button>
-<h2>Hot Dogs</h2>
-
-<div class="menu-grid">
-  <div class="card" onclick="pedido('Hot Dog Simples', '10,00')"><h3>Simples</h3><p class="price">R$ 10,00</p></div>
-  <div class="card" onclick="pedido('Hot Dog Completo', '14,00')"><h3>Completo</h3><p class="price">R$ 14,00</p></div>
-  <div class="card" onclick="pedido('Hot Dog Bacon', '16,00')"><h3>Bacon</h3><p class="price">R$ 16,00</p></div>
-  <div class="card" onclick="pedido('Hot Dog Duplo', '18,00')"><h3>Duplo</h3><p class="price">R$ 18,00</p></div>
-  <div class="card" onclick="pedido('Hot Dog Especial', '20,00')"><h3>Especial</h3><p class="price">R$ 20,00</p></div>
-</div>
-</section>
-
-<!-- ===== BEBIDAS ===== -->
-<section id="bebidas">
-<button class="voltar" onclick="abrir('principal')">⬅ Voltar</button>
-<h2>Bebidas</h2>
-
-<div class="menu-grid">
-  <div class="card" onclick="pedido('Refrigerante', '5,00')"><h3>Refrigerante</h3></div>
-  <div class="card" onclick="pedido('Suco Natural', '6,00')"><h3>Suco</h3></div>
-  <div class="card" onclick="pedido('Água', '3,00')"><h3>Água</h3></div>
-  <div class="card" onclick="pedido('Água com Gás', '4,00')"><h3>Água c/ Gás</h3></div>
-  <div class="card" onclick="pedido('Energético', '10,00')"><h3>Energético</h3></div>
-</div>
-</section>
-
 </div>
 
-<footer>
-<p>Siga a gente</p>
-<a href="https://instagram.com/cantinho_da_villazs" target="_blank">
-  <img src="img/intagram.jpg">
-</a>
-<a href="https://wa.me/5511913533982" target="_blank">
-  <img src="img/whatsapp.webp">
-</a>
-</footer>
+<!-- CARRINHO -->
+<div id="carrinho">
+  <h3>🛒 Seu Pedido</h3>
+  <ul id="lista"></ul>
+  <b>Total: R$ <span id="total">0.00</span></b>
+  <button class="btn-finalizar" onclick="finalizar()">Finalizar no WhatsApp</button>
+</div>
 
 <script>
-function abrir(id) {
-  document.querySelectorAll("section").forEach(s => s.classList.remove("active"));
-  document.getElementById(id).classList.add("active");
+let carrinho = [];
+let total = 0;
+let itemAtual = {};
+
+function abrirModal(nome, preco) {
+  itemAtual = { nome, preco };
+  document.getElementById("modalTitulo").innerText = nome;
+  document.getElementById("modal").style.display = "block";
 }
 
-function pedido(nome, preco) {
-  const msg = `Olá! Quero pedir:%0A${nome}%0AValor: R$ ${preco}`;
-  window.open(`https://wa.me/5511913533982?text=${msg}`, "_blank");
+function fecharModal() {
+  document.getElementById("modal").style.display = "none";
+}
+
+function confirmarItem() {
+  const qtd = Number(document.getElementById("quantidade").value);
+  const obs = document.getElementById("obs").value;
+  const adicionais = [...document.querySelectorAll("input[type=checkbox]:checked")].map(a => a.value);
+
+  let precoFinal = itemAtual.preco * qtd + (adicionais.length * 3);
+
+  carrinho.push({
+    nome: itemAtual.nome,
+    qtd,
+    adicionais,
+    obs,
+    preco: precoFinal
+  });
+
+  total += precoFinal;
+  atualizar();
+  fecharModal();
+}
+
+function atualizar() {
+  const lista = document.getElementById("lista");
+  lista.innerHTML = "";
+  carrinho.forEach(item => {
+    lista.innerHTML += `<li>${item.qtd}x ${item.nome} – R$ ${item.preco.toFixed(2)}</li>`;
+  });
+  document.getElementById("total").innerText = total.toFixed(2);
+}
+
+function finalizar() {
+  let msg = "🧾 *Pedido Cantinho da Villa*%0A%0A";
+  carrinho.forEach(i => {
+    msg += `• ${i.qtd}x ${i.nome}%0A`;
+    if (i.adicionais.length) msg += `  ➕ ${i.adicionais.join(", ")}%0A`;
+    if (i.obs) msg += `  📝 ${i.obs}%0A`;
+  });
+  msg += `%0A💰 Total: R$ ${total.toFixed(2)}`;
+  window.open(`https://wa.me/5511913533982?text=${msg}`);
 }
 </script>
 
