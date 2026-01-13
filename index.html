@@ -12,8 +12,6 @@ body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
   background: #fff8e1;
-  color: #333;
-  overflow-x: hidden;
 }
 
 /* ===== TOPO ===== */
@@ -25,12 +23,7 @@ header {
 }
 
 header img {
-  max-width: 160px;
-}
-
-header h1 {
-  margin: 10px 0;
-  text-shadow: 2px 2px 4px rgba(0,0,0,.6);
+  max-width: 150px;
 }
 
 /* ===== MENU ===== */
@@ -40,35 +33,37 @@ nav {
   justify-content: center;
   gap: 15px;
   padding: 15px;
-  flex-wrap: wrap;
 }
 
 nav a {
-  color: #fff;
-  text-decoration: none;
+  color: white;
   font-weight: bold;
-  padding: 10px 18px;
-  border-radius: 8px;
+  text-decoration: none;
 }
 
-/* ===== FUNDO DO CARDÁPIO ===== */
+/* ===== FUNDO ===== */
 .menu-bg {
   background: url("img/restaurante.webp") center/cover no-repeat;
-  padding: 40px 20px;
+  padding: 40px 15px;
 }
 
 /* ===== SEÇÕES ===== */
 section {
-  max-width: 1000px;
-  margin: 30px auto;
-  background: rgba(255,255,255,0.95);
+  max-width: 900px;
+  margin: auto;
+  background: rgba(255,255,255,.95);
   border-radius: 12px;
   padding: 20px;
+  display: none;
+}
+
+section.active {
+  display: block;
 }
 
 h2 {
-  color: #b71c1c;
   text-align: center;
+  color: #b71c1c;
 }
 
 /* ===== GRID ===== */
@@ -80,17 +75,11 @@ h2 {
 
 /* ===== CARD ===== */
 .card {
-  background: #fff;
+  background: white;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0,0,0,.2);
   cursor: pointer;
-  transition: transform .3s, box-shadow .3s;
-}
-
-.card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 6px 14px rgba(0,0,0,.3);
 }
 
 .card h3 {
@@ -100,7 +89,18 @@ h2 {
 
 .price {
   font-weight: bold;
-  margin-top: 10px;
+}
+
+/* ===== BOTÃO VOLTAR ===== */
+.voltar {
+  background: #2e7d32;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  width: 100%;
+  font-weight: bold;
+  margin-bottom: 20px;
 }
 
 /* ===== FOOTER ===== */
@@ -114,11 +114,6 @@ footer {
 footer img {
   width: 40px;
   margin: 10px;
-  transition: transform .3s;
-}
-
-footer img:hover {
-  transform: scale(1.15);
 }
 </style>
 </head>
@@ -126,64 +121,76 @@ footer img:hover {
 <body>
 
 <header>
-  <img src="logo.png" alt="Cantinho da Villa">
+  <img src="logo.png">
   <h1>Cantinho da Villa</h1>
   <p>Sabor que abraça 😋</p>
 </header>
 
 <nav>
-  <a href="#hamburguer">🍔 Hambúrguer</a>
-  <a href="#hotdog">🌭 Hot Dog</a>
-  <a href="#bebidas">🥤 Bebidas</a>
+  <a href="#" onclick="abrir('principal')">🏠 Início</a>
 </nav>
 
 <div class="menu-bg">
 
-<!-- ===== HAMBÚRGUER ===== -->
-<section id="hamburguer">
-<h2>Hambúrgueres</h2>
+<!-- ===== MENU PRINCIPAL ===== -->
+<section id="principal" class="active">
+<h2>Cardápio</h2>
 <div class="menu-grid">
 
-  <div class="card" onclick="pedido('X-Xisquinho', '15,00')">
-    <h3>X-Xisquinho</h3>
-    O X-tudo da vila
-    <p class="price">R$ 15,00</p>
+  <div class="card" onclick="abrir('hamburguer')">
+    <h3>🍔 Hambúrgueres</h3>
   </div>
 
+  <div class="card" onclick="abrir('hotdog')">
+    <h3>🌭 Hot Dogs</h3>
+  </div>
+
+  <div class="card" onclick="abrir('bebidas')">
+    <h3>🥤 Bebidas</h3>
+  </div>
+
+</div>
+</section>
+
+<!-- ===== HAMBÚRGUER ===== -->
+<section id="hamburguer">
+<button class="voltar" onclick="abrir('principal')">⬅ Voltar</button>
+<h2>Hambúrgueres</h2>
+
+<div class="menu-grid">
+  <div class="card" onclick="pedido('X-Burger', '14,00')"><h3>X-Burger</h3><p class="price">R$ 14,00</p></div>
+  <div class="card" onclick="pedido('X-Salada', '16,00')"><h3>X-Salada</h3><p class="price">R$ 16,00</p></div>
+  <div class="card" onclick="pedido('X-Bacon', '18,00')"><h3>X-Bacon</h3><p class="price">R$ 18,00</p></div>
+  <div class="card" onclick="pedido('X-Tudo', '20,00')"><h3>X-Tudo</h3><p class="price">R$ 20,00</p></div>
+  <div class="card" onclick="pedido('X-Frango', '17,00')"><h3>X-Frango</h3><p class="price">R$ 17,00</p></div>
 </div>
 </section>
 
 <!-- ===== HOT DOG ===== -->
 <section id="hotdog">
+<button class="voltar" onclick="abrir('principal')">⬅ Voltar</button>
 <h2>Hot Dogs</h2>
+
 <div class="menu-grid">
-
-  <div class="card" onclick="pedido('Hot Dog de Pote', '12,00')">
-    <h3>Hot Dog de Pote</h3>
-    Clássico da vila
-    <p class="price">R$ 12,00</p>
-  </div>
-
+  <div class="card" onclick="pedido('Hot Dog Simples', '10,00')"><h3>Simples</h3><p class="price">R$ 10,00</p></div>
+  <div class="card" onclick="pedido('Hot Dog Completo', '14,00')"><h3>Completo</h3><p class="price">R$ 14,00</p></div>
+  <div class="card" onclick="pedido('Hot Dog Bacon', '16,00')"><h3>Bacon</h3><p class="price">R$ 16,00</p></div>
+  <div class="card" onclick="pedido('Hot Dog Duplo', '18,00')"><h3>Duplo</h3><p class="price">R$ 18,00</p></div>
+  <div class="card" onclick="pedido('Hot Dog Especial', '20,00')"><h3>Especial</h3><p class="price">R$ 20,00</p></div>
 </div>
 </section>
 
 <!-- ===== BEBIDAS ===== -->
 <section id="bebidas">
+<button class="voltar" onclick="abrir('principal')">⬅ Voltar</button>
 <h2>Bebidas</h2>
+
 <div class="menu-grid">
-
-  <div class="card" onclick="pedido('Refrigerante', '5,00')">
-    <h3>Refrigerante</h3>
-    Coca, Fanta ou Guaraná
-    <p class="price">R$ 5,00</p>
-  </div>
-
-  <div class="card" onclick="pedido('Suco Natural', '6,00')">
-    <h3>Suco Natural</h3>
-    Sabores variados
-    <p class="price">R$ 6,00</p>
-  </div>
-
+  <div class="card" onclick="pedido('Refrigerante', '5,00')"><h3>Refrigerante</h3></div>
+  <div class="card" onclick="pedido('Suco Natural', '6,00')"><h3>Suco</h3></div>
+  <div class="card" onclick="pedido('Água', '3,00')"><h3>Água</h3></div>
+  <div class="card" onclick="pedido('Água com Gás', '4,00')"><h3>Água c/ Gás</h3></div>
+  <div class="card" onclick="pedido('Energético', '10,00')"><h3>Energético</h3></div>
 </div>
 </section>
 
@@ -192,25 +199,22 @@ footer img:hover {
 <footer>
 <p>Siga a gente</p>
 <a href="https://instagram.com/cantinho_da_villazs" target="_blank">
-  <img src="img/intagram.jpg" alt="Instagram">
+  <img src="img/intagram.jpg">
 </a>
 <a href="https://wa.me/5511913533982" target="_blank">
-  <img src="img/whatsapp.webp" alt="WhatsApp">
+  <img src="img/whatsapp.webp">
 </a>
-<p>© 2026 Cantinho da Villa</p>
 </footer>
 
 <script>
-function pedido(nome, preco) {
-  const mensagem = 
-    `Olá! Quero fazer um pedido 😋%0A` +
-    `Produto: ${nome}%0A` +
-    `Valor: R$ ${preco}`;
+function abrir(id) {
+  document.querySelectorAll("section").forEach(s => s.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+}
 
-  window.open(
-    `https://wa.me/5511913533982?text=${mensagem}`,
-    "_blank"
-  );
+function pedido(nome, preco) {
+  const msg = `Olá! Quero pedir:%0A${nome}%0AValor: R$ ${preco}`;
+  window.open(`https://wa.me/5511913533982?text=${msg}`, "_blank");
 }
 </script>
 
