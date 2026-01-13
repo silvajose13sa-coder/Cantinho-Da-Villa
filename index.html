@@ -13,6 +13,17 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   background: #fff8e1;
   color: #333;
+  /* GARANTE QUE O FIXED FUNCIONE NO MOBILE */
+body {
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* REMOVE PROBLEMAS DE CAMADA */
+.menu-bg,
+.card,
+section {
+  transform: none !important;
 }
 
 /* TOPO COM IMAGEM DA VILA */
@@ -134,16 +145,19 @@ h2 {
 /* CARRINHO */
 #carrinho {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+
   background: white;
   padding: 15px;
-  width: 260px;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0,0,0,.3);
- 
-  z-index: 9999;
-  max-height: 70vh;
+  width: calc(100% - 30px);
+  max-width: 360px;
+
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,.35);
+
+  z-index: 99999;
 }
 
 #carrinho h3 {
