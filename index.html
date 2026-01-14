@@ -155,6 +155,20 @@ footer img{
 footer img:hover{transform:scale(1.2)}
 </style>
 </head>
+<script>
+document.addEventListener("click", function(e){
+  const cart = document.getElementById("cart");
+  const btn = document.querySelector(".cart-btn");
+
+  if (
+    cart.classList.contains("active") &&
+    !cart.contains(e.target) &&
+    !btn.contains(e.target)
+  ) {
+    cart.classList.remove("active");
+  }
+});
+</script>
 
 <body>
 
@@ -182,6 +196,16 @@ footer img:hover{transform:scale(1.2)}
 
 <!-- PAINEL CARRINHO -->
 <div class="cart-panel" id="cart">
+  <div style="display:flex;justify-content:space-between;align-items:center">
+    <h3>Seu Pedido</h3>
+    <button onclick="toggleCart()" style="
+      background:none;
+      border:none;
+      font-size:22px;
+      cursor:pointer;
+    ">✖</button>
+  </div>
+
 <h3>Seu Pedido</h3>
 <div id="items"></div>
 <p>Taxa entrega: R$ 3,50</p>
@@ -249,7 +273,8 @@ function render(){
 }
 
 function toggleCart(){
- cart.classList.toggle("active");
+  document.getElementById("cart").classList.toggle("active");
+
 }
 
 function finalizar(){
@@ -258,6 +283,20 @@ function finalizar(){
  msg+=`Taxa: R$ 3,50%0ATotal: R$ ${total.innerText}`;
  window.open(`https://wa.me/5511913533982?text=${msg}`);
 }
+</script>
+<script>
+document.addEventListener("click", function(e){
+  const cart = document.getElementById("cart");
+  const btn = document.querySelector(".cart-btn");
+
+  if (
+    cart.classList.contains("active") &&
+    !cart.contains(e.target) &&
+    !btn.contains(e.target)
+  ) {
+    cart.classList.remove("active");
+  }
+});
 </script>
 
 </body>
