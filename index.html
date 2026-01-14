@@ -178,11 +178,15 @@ document.addEventListener("click", function(e){
 </header>
 
 <nav>
+  <button onclick="abrirPainel()">🔒 Painel do Chefe</button>
+
   <button onclick="mostrar('hamb')">🍔 Hambúrguer</button>
   <button onclick="mostrar('hot')">🌭 Hot Dog</button>
   <button onclick="mostrar('beb')">🥤 Bebidas</button>
   <button onclick="mostrar('combo')">🎁 Combos</button>
 </nav>
+  <button onclick="abrirPainel()">🔒 Painel do Chefe</button>
+
 
 <div class="menu-bg">
 <section>
@@ -230,24 +234,51 @@ document.addEventListener("click", function(e){
 
 <script>
 const dados={
- hamb:[["X-Burger",15],["X-Salada",17],["X-Bacon",19],["X-Egg",18],["X-Tudo",22]],
- hot:[["Hot Simples",10],["Hot Bacon",14],["Hot Cheddar",15],["Hot Duplo",18],["Hot Especial",20]],
- beb:[["Refrigerante",5],["Suco",6],["Água",3],["H2O",4],["Guaraná",5]],
- combo:[["Combo 1",25],["Combo 2",28],["Combo 3",30],["Combo 4",32],["Combo 5",35]]
+ hamb:[
+  {nome:"X-Burger",preco:15,ativo:true},
+  {nome:"X-Salada",preco:17,ativo:true},
+  {nome:"X-Bacon",preco:19,ativo:true},
+  {nome:"X-Egg",preco:18,ativo:true},
+  {nome:"X-Tudo",preco:22,ativo:true}
+ ],
+ hot:[
+  {nome:"Hot Simples",preco:10,ativo:true},
+  {nome:"Hot Bacon",preco:14,ativo:true},
+  {nome:"Hot Cheddar",preco:15,ativo:true},
+  {nome:"Hot Duplo",preco:18,ativo:true},
+  {nome:"Hot Especial",preco:20,ativo:true}
+ ],
+ beb:[
+  {nome:"Refrigerante",preco:5,ativo:true},
+  {nome:"Suco",preco:6,ativo:true},
+  {nome:"Água",preco:3,ativo:true},
+  {nome:"H2O",preco:4,ativo:true},
+  {nome:"Guaraná",preco:5,ativo:true}
+ ],
+ combo:[
+  {nome:"Combo 1",preco:25,ativo:true},
+  {nome:"Combo 2",preco:28,ativo:true},
+  {nome:"Combo 3",preco:30,ativo:true},
+  {nome:"Combo 4",preco:32,ativo:true},
+  {nome:"Combo 5",preco:35,ativo:true}
+ ]
 };
 
 let carrinho=[];
 const taxa=3.5;
 
 function mostrar(cat){
- menu.innerHTML="";
- titulo.innerText=cat.toUpperCase();
+ document.getElementById("menu").innerHTML="";
+ document.getElementById("titulo").innerText=cat.toUpperCase();
+
  dados[cat].forEach(i=>{
+  if(!i.ativo) return;
+
   menu.innerHTML+=`
   <div class="card">
-   <h3>${i[0]}</h3>
-   <p>R$ ${i[1]}</p>
-   <button onclick="add('${i[0]}',${i[1]})">Adicionar</button>
+   <h3>${i.nome}</h3>
+   <p>R$ ${i.preco}</p>
+   <button onclick="add('${i.nome}',${i.preco})">Adicionar</button>
   </div>`;
  });
 }
@@ -297,6 +328,56 @@ document.addEventListener("click", function(e){
     cart.classList.remove("active");
   }
 });
+</script>
+<!-- PAINEL DO CHEFE -->
+<div id="painel" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:#000000cc;z-index:99999;overflow:auto">
+ <div style="background:#fff;max-width:500px;margin:40px auto;padding:20px;border-radius:12px">
+  <h2>Painel do Chefe</h2>
+  <input id="senhaPainel" type="password" placeholder="Senha">
+  <button onclick="entrarPainel()">Entrar</button>
+
+  <div id="conteudoPainel" style="display:none;margin-top:20px"></div>
+
+  <button onclick="fecharPainel()" style="margin-top:15px">Fechar</button>
+ </div>
+</div>
+
+<script>
+const SENHA="s@Samuel2018";
+
+function abrirPainel(){
+ document.getElementById("painel").style.display="block";
+}
+
+function fecharPainel(){
+ document.getElementById("painel").style.display="none";
+}
+
+function entrarPainel(){
+ if(document.getElementById("senhaPainel").value!==SENHA){
+  alert("Senha incorreta");
+  return;
+ }
+ document.getElementById("conteudoPainel").style.display="block";
+ renderPainel();
+}
+
+function renderPainel(){
+ let html="";
+ for(let cat in dados){
+  html+=`<h3>${cat.toUpperCase()}</h3>`;
+  dados[cat].forEach(i=>{
+   html+=`
+   <div style="display:flex;justify-content:space-between;margin-bottom:6px">
+    ${i.nome} - R$ ${i.preco}
+    <button onclick="i.ativo=!i.ativo;renderPainel()">
+     ${i.ativo?"🟢 ON":"🔴 OFF"}
+    </button>
+   </div>`;
+  });
+ }
+ document.getElementById("conteudoPainel").innerHTML=html;
+}
 </script>
 
 </body>
