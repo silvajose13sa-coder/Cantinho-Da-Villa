@@ -19,12 +19,8 @@ header{
   color:#fff;
   padding:70px 20px;
 }
-header img{
-  width:140px;
-}
-header h1{
-  text-shadow:2px 2px 6px #000;
-}
+header img{width:140px}
+header h1{text-shadow:2px 2px 6px #000}
 
 /* ===== MENU ===== */
 nav{
@@ -113,9 +109,7 @@ h2{text-align:center;color:#b71c1c}
   padding:15px;
   overflow:auto;
 }
-.cart-panel.active{
-  transform:translateY(0);
-}
+.cart-panel.active{transform:translateY(0)}
 .item{
   display:flex;
   justify-content:space-between;
@@ -155,20 +149,6 @@ footer img{
 footer img:hover{transform:scale(1.2)}
 </style>
 </head>
-<script>
-document.addEventListener("click", function(e){
-  const cart = document.getElementById("cart");
-  const btn = document.querySelector(".cart-btn");
-
-  if (
-    cart.classList.contains("active") &&
-    !cart.contains(e.target) &&
-    !btn.contains(e.target)
-  ) {
-    cart.classList.remove("active");
-  }
-});
-</script>
 
 <body>
 
@@ -179,7 +159,6 @@ document.addEventListener("click", function(e){
 
 <nav>
   <button onclick="abrirPainel()">🔒 Painel do Chefe</button>
-
   <button onclick="mostrar('hamb')">🍔 Hambúrguer</button>
   <button onclick="mostrar('hot')">🌭 Hot Dog</button>
   <button onclick="mostrar('beb')">🥤 Bebidas</button>
@@ -193,31 +172,23 @@ document.addEventListener("click", function(e){
 </section>
 </div>
 
-<!-- BOTÃO CARRINHO -->
 <div class="cart-btn" onclick="toggleCart()">🛒 Ver pedido (<span id="qtd">0</span>)</div>
 
-<!-- PAINEL CARRINHO -->
 <div class="cart-panel" id="cart">
   <div style="display:flex;justify-content:space-between;align-items:center">
     <h3>Seu Pedido</h3>
-    <button onclick="toggleCart()" style="
-      background:none;
-      border:none;
-      font-size:22px;
-      cursor:pointer;
-    ">✖</button>
+    <button onclick="toggleCart()" style="background:none;border:none;font-size:22px;cursor:pointer">✖</button>
   </div>
 
-<h3>Seu Pedido</h3>
-<div id="items"></div>
-<p>Taxa entrega: R$ 3,50</p>
-<p><b>Total: R$ <span id="total">0</span></b></p>
+  <div id="items"></div>
+  <p>Taxa entrega: R$ 3,50</p>
+  <p><b>Total: R$ <span id="total">0</span></b></p>
 
-<input id="nome" placeholder="Seu nome">
-<input id="endereco" placeholder="Endereço">
-<textarea id="obs" placeholder="Observações"></textarea>
+  <input id="nome" placeholder="Seu nome">
+  <input id="endereco" placeholder="Endereço">
+  <textarea id="obs" placeholder="Observações"></textarea>
 
-<button class="finalizar" onclick="finalizar()">Finalizar no WhatsApp</button>
+  <button class="finalizar" onclick="finalizar()">Finalizar no WhatsApp</button>
 </div>
 
 <footer>
@@ -229,6 +200,17 @@ document.addEventListener("click", function(e){
 <img src="img/whatsapp.webp">
 </a>
 </footer>
+
+<!-- PAINEL DO CHEFE -->
+<div id="painel" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:#000000cc;z-index:99999;overflow:auto">
+ <div style="background:#fff;max-width:500px;margin:40px auto;padding:20px;border-radius:12px">
+  <h2>Painel do Chefe</h2>
+  <input id="senhaPainel" type="password" placeholder="Senha">
+  <button onclick="entrarPainel()">Entrar</button>
+  <div id="conteudoPainel" style="display:none;margin-top:20px"></div>
+  <button onclick="fecharPainel()" style="margin-top:15px">Fechar</button>
+ </div>
+</div>
 
 <script>
 const dados={
@@ -265,24 +247,17 @@ const dados={
 let carrinho=[];
 const taxa=3.5;
 
-  function toggleItem(cat,idx){
- dados[cat][idx].ativo = !dados[cat][idx].ativo;
- renderPainel();
-}
-  
 function mostrar(cat){
- document.getElementById("menu").innerHTML="";
- document.getElementById("titulo").innerText=cat.toUpperCase();
-
+ menu.innerHTML="";
+ titulo.innerText=cat.toUpperCase();
  dados[cat].forEach(i=>{
   if(!i.ativo) return;
-
   menu.innerHTML+=`
-  <div class="card">
-   <h3>${i.nome}</h3>
-   <p>R$ ${i.preco}</p>
-   <button onclick="add('${i.nome}',${i.preco})">Adicionar</button>
-  </div>`;
+   <div class="card">
+    <h3>${i.nome}</h3>
+    <p>R$ ${i.preco}</p>
+    <button onclick="add('${i.nome}',${i.preco})">Adicionar</button>
+   </div>`;
  });
 }
 
@@ -296,10 +271,10 @@ function render(){
  carrinho.forEach((i,idx)=>{
   t+=i.p;
   html+=`
-  <div class="item">
-   ${i.n}
-   <button onclick="carrinho.splice(${idx},1);render()">❌</button>
-  </div>`;
+   <div class="item">
+    ${i.n}
+    <button onclick="carrinho.splice(${idx},1);render()">❌</button>
+   </div>`;
  });
  items.innerHTML=html;
  total.innerText=t.toFixed(2);
@@ -307,8 +282,7 @@ function render(){
 }
 
 function toggleCart(){
-  document.getElementById("cart").classList.toggle("active");
-
+ cart.classList.toggle("active");
 }
 
 function finalizar(){
@@ -317,51 +291,21 @@ function finalizar(){
  msg+=`Taxa: R$ 3,50%0ATotal: R$ ${total.innerText}`;
  window.open(`https://wa.me/5511913533982?text=${msg}`);
 }
-</script>
-<script>
-document.addEventListener("click", function(e){
-  const cart = document.getElementById("cart");
-  const btn = document.querySelector(".cart-btn");
 
-  if (
-    cart.classList.contains("active") &&
-    !cart.contains(e.target) &&
-    !btn.contains(e.target)
-  ) {
-    cart.classList.remove("active");
-  }
+document.addEventListener("click",e=>{
+ if(cart.classList.contains("active") && !cart.contains(e.target) && !document.querySelector(".cart-btn").contains(e.target)){
+  cart.classList.remove("active");
+ }
 });
-</script>
-<!-- PAINEL DO CHEFE -->
-<div id="painel" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:#000000cc;z-index:99999;overflow:auto">
- <div style="background:#fff;max-width:500px;margin:40px auto;padding:20px;border-radius:12px">
-  <h2>Painel do Chefe</h2>
-  <input id="senhaPainel" type="password" placeholder="Senha">
-  <button onclick="entrarPainel()">Entrar</button>
 
-  <div id="conteudoPainel" style="display:none;margin-top:20px"></div>
-
-  <button onclick="fecharPainel()" style="margin-top:15px">Fechar</button>
- </div>
-</div>
-
-<script>
 const SENHA="s@Samuel2018";
 
-function abrirPainel(){
- document.getElementById("painel").style.display="block";
-}
-
-function fecharPainel(){
- document.getElementById("painel").style.display="none";
-}
+function abrirPainel(){painel.style.display="block"}
+function fecharPainel(){painel.style.display="none"}
 
 function entrarPainel(){
- if(document.getElementById("senhaPainel").value!==SENHA){
-  alert("Senha incorreta");
-  return;
- }
- document.getElementById("conteudoPainel").style.display="block";
+ if(senhaPainel.value!==SENHA){alert("Senha incorreta");return}
+ conteudoPainel.style.display="block";
  renderPainel();
 }
 
@@ -369,32 +313,20 @@ function renderPainel(){
  let html="";
  for(let cat in dados){
   html+=`<h3>${cat.toUpperCase()}</h3>`;
-
   dados[cat].forEach((i,idx)=>{
    html+=`
-   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
-    <span>${i.nome}</span>
-
-    <input 
-      type="number" 
-      value="${i.preco}" 
-      style="width:70px"
-      onchange="mudarPreco('${cat}',${idx},this.value)"
-    >
-
-    <button onclick="toggleItem('${cat}',${idx})">
-     ${i.ativo ? "🟢 ON" : "🔴 OFF"}
-    </button>
-   </div>
-   `;
+    <div style="display:flex;gap:6px;align-items:center;margin-bottom:6px">
+     <span>${i.nome}</span>
+     <input type="number" value="${i.preco}" style="width:70px" onchange="dados['${cat}'][${idx}].preco=this.value">
+     <button onclick="dados['${cat}'][${idx}].ativo=!dados['${cat}'][${idx}].ativo;renderPainel()">
+      ${i.ativo?"🟢 ON":"🔴 OFF"}
+     </button>
+    </div>`;
   });
  }
- document.getElementById("conteudoPainel").innerHTML=html;
-}
- document.getElementById("conteudoPainel").innerHTML=html;
+ conteudoPainel.innerHTML=html;
 }
 </script>
-}
 
 </body>
 </html>
