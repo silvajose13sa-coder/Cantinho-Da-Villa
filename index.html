@@ -267,6 +267,11 @@ const dados={
 let carrinho=[];
 const taxa=3.5;
 
+  function toggleItem(cat,idx){
+ dados[cat][idx].ativo = !dados[cat][idx].ativo;
+ renderPainel();
+}
+  
 function mostrar(cat){
  document.getElementById("menu").innerHTML="";
  document.getElementById("titulo").innerText=cat.toUpperCase();
@@ -366,26 +371,31 @@ function renderPainel(){
  let html="";
  for(let cat in dados){
   html+=`<h3>${cat.toUpperCase()}</h3>`;
-  dados[cat].forEach(i=>{
+
+  dados[cat].forEach((i,idx)=>{
    html+=`
-   <div style="display:flex;justify-content:space-between;margin-bottom:6px">
-    ${i.nome} - R$ ${i.preco}
-    <button onclick="i.ativo=!i.ativo;renderPainel()">
-     ${i.ativo?"🟢 ON":"🔴 OFF"}
+   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+    <span>${i.nome}</span>
+
+    <input 
+      type="number" 
+      value="${i.preco}" 
+      style="width:70px"
+      onchange="mudarPreco('${cat}',${idx},this.value)"
+    >
+
+    <button onclick="toggleItem('${cat}',${idx})">
+     ${i.ativo ? "🟢 ON" : "🔴 OFF"}
     </button>
-   </div>`;
+   </div>
+   `;
   });
  }
  document.getElementById("conteudoPainel").innerHTML=html;
 }
+ document.getElementById("conteudoPainel").innerHTML=html;
+}
 </script>
-function toggleItem(cat,idx){
- dados[cat][idx].ativo = !dados[cat][idx].ativo;
- renderPainel();
-
- if(document.getElementById("titulo").innerText === cat.toUpperCase()){
-  mostrar(cat);
- }
 }
 
 </body>
