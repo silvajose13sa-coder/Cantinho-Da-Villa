@@ -14,14 +14,13 @@ body{
 
 /* ===== TOPO ===== */
 header{
-  background:url( vila-topo.jpg") center/cover no-repeat;
+  background:url("vila-topo.jpg") center/cover no-repeat;
   text-align:center;
   color:#fff;
   padding:70px 20px;
 }
 header img{
-  width:150px;
-  margin-bottom:10px;
+  width:140px;
 }
 header h1{
   text-shadow:2px 2px 6px #000;
@@ -84,26 +83,43 @@ h2{text-align:center;color:#b71c1c}
   border-radius:6px;
 }
 
-/* ===== CARRINHO MOBILE ===== */
-#cart{
+/* ===== BOTÃO CARRINHO ===== */
+.cart-btn{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:#d32f2f;
+  color:#fff;
+  padding:14px 18px;
+  border-radius:30px;
+  font-weight:bold;
+  cursor:pointer;
+  z-index:9999;
+}
+
+/* ===== PAINEL CARRINHO ===== */
+.cart-panel{
   position:fixed;
   bottom:0;
   left:0;
   width:100%;
+  max-height:85%;
   background:#fff;
-  box-shadow:0 -4px 15px rgba(0,0,0,.3);
-  padding:15px;
+  border-radius:16px 16px 0 0;
+  box-shadow:0 -4px 20px rgba(0,0,0,.4);
+  transform:translateY(100%);
+  transition:.3s;
   z-index:9999;
+  padding:15px;
+  overflow:auto;
 }
-#cart h3{text-align:center}
-#items{max-height:160px;overflow:auto;margin:10px 0}
+.cart-panel.active{
+  transform:translateY(0);
+}
 .item{
   display:flex;
   justify-content:space-between;
   margin-bottom:6px;
-}
-.controls button{
-  margin:0 4px;
 }
 
 /* ===== FORM ===== */
@@ -161,8 +177,12 @@ footer img:hover{transform:scale(1.2)}
 </section>
 </div>
 
-<div id="cart">
-<h3>🛒 Seu Pedido</h3>
+<!-- BOTÃO CARRINHO -->
+<div class="cart-btn" onclick="toggleCart()">🛒 Ver pedido (<span id="qtd">0</span>)</div>
+
+<!-- PAINEL CARRINHO -->
+<div class="cart-panel" id="cart">
+<h3>Seu Pedido</h3>
 <div id="items"></div>
 <p>Taxa entrega: R$ 3,50</p>
 <p><b>Total: R$ <span id="total">0</span></b></p>
@@ -196,13 +216,14 @@ let carrinho=[];
 const taxa=3.5;
 
 function mostrar(cat){
- document.getElementById("menu").innerHTML="";
- document.getElementById("titulo").innerText=cat.toUpperCase();
+ menu.innerHTML="";
+ titulo.innerText=cat.toUpperCase();
  dados[cat].forEach(i=>{
-  menu.innerHTML+=`<div class="card">
-  <h3>${i[0]}</h3>
-  <p>R$ ${i[1]}</p>
-  <button onclick="add('${i[0]}',${i[1]})">Adicionar</button>
+  menu.innerHTML+=`
+  <div class="card">
+   <h3>${i[0]}</h3>
+   <p>R$ ${i[1]}</p>
+   <button onclick="add('${i[0]}',${i[1]})">Adicionar</button>
   </div>`;
  });
 }
@@ -216,11 +237,19 @@ function render(){
  let html="",t=taxa;
  carrinho.forEach((i,idx)=>{
   t+=i.p;
-  html+=`<div class="item">${i.n} 
-  <button onclick="carrinho.splice(${idx},1);render()">❌</button></div>`;
+  html+=`
+  <div class="item">
+   ${i.n}
+   <button onclick="carrinho.splice(${idx},1);render()">❌</button>
+  </div>`;
  });
  items.innerHTML=html;
  total.innerText=t.toFixed(2);
+ qtd.innerText=carrinho.length;
+}
+
+function toggleCart(){
+ cart.classList.toggle("active");
 }
 
 function finalizar(){
