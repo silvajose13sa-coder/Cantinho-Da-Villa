@@ -6,119 +6,137 @@
 <title>Cantinho da Villa</title>
 
 <style>
-*{box-sizing:border-box}
+*{box-sizing:border-box;margin:0;padding:0}
 body{
-  margin:0;
-  font-family:Arial, Helvetica, sans-serif;
+  font-family:Arial,Helvetica,sans-serif;
   background:#fff8e1;
 }
 
-/* TOPO - VILA DO CHAVES (SEM VERMELHO) */
+/* ===== TOPO ===== */
 header{
-  background:url("img/vila-topo.jpg") center/cover no-repeat;
+  background:url( vila-topo.jpg") center/cover no-repeat;
   text-align:center;
-  padding:35px 15px;
+  color:#fff;
+  padding:70px 20px;
 }
 header img{
-  width:140px;
+  width:150px;
   margin-bottom:10px;
 }
 header h1{
-  color:#fff;
-  text-shadow:2px 2px 5px #000;
+  text-shadow:2px 2px 6px #000;
 }
 
-/* MENU */
+/* ===== MENU ===== */
 nav{
-  background:#2e7d32;
   display:flex;
   justify-content:center;
-  gap:15px;
-  padding:15px;
+  gap:10px;
+  background:#2e7d32;
+  padding:12px;
   flex-wrap:wrap;
 }
 nav button{
-  background:#1b5e20;
-  color:#fff;
+  background:#fff;
   border:none;
   padding:10px 16px;
-  border-radius:8px;
+  border-radius:20px;
   font-weight:bold;
   cursor:pointer;
 }
 
-/* FUNDO RESTAURANTE DONA FLORINDA */
-#fundo-restaurante{
+/* ===== FUNDO CARDÁPIO ===== */
+.menu-bg{
   background:url("img/restaurante.webp") center/cover no-repeat;
-  padding:40px 10px;
-}
-
-/* CARDÁPIO */
-section{
-  max-width:1000px;
-  margin:auto;
-  background:rgba(255,255,255,.95);
-  border-radius:12px;
   padding:30px 15px;
 }
+
+/* ===== SEÇÃO ===== */
+section{
+  background:rgba(255,255,255,0.95);
+  max-width:1000px;
+  margin:auto;
+  padding:20px;
+  border-radius:14px;
+}
+h2{text-align:center;color:#b71c1c}
+
+/* ===== GRID ===== */
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:20px;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:15px;
+  margin-top:15px;
 }
 .card{
   background:#fff;
-  padding:20px;
+  padding:15px;
   border-radius:10px;
-  box-shadow:0 2px 6px rgba(0,0,0,.2);
-  text-align:center;
+  box-shadow:0 4px 10px rgba(0,0,0,.2);
 }
 .card button{
   width:100%;
-  padding:10px;
+  padding:8px;
+  margin-top:8px;
   background:#d32f2f;
   color:#fff;
   border:none;
   border-radius:6px;
-  cursor:pointer;
 }
 
-/* CARRINHO */
-#carrinho{
+/* ===== CARRINHO MOBILE ===== */
+#cart{
   position:fixed;
-  bottom:15px;
-  right:15px;
+  bottom:0;
+  left:0;
+  width:100%;
   background:#fff;
-  width:300px;
+  box-shadow:0 -4px 15px rgba(0,0,0,.3);
   padding:15px;
-  border-radius:12px;
-  box-shadow:0 4px 10px rgba(0,0,0,.3);
+  z-index:9999;
 }
-#carrinho ul{
-  list-style:none;
-  padding:0;
-}
-#carrinho li{
+#cart h3{text-align:center}
+#items{max-height:160px;overflow:auto;margin:10px 0}
+.item{
   display:flex;
   justify-content:space-between;
-  margin-bottom:5px;
+  margin-bottom:6px;
 }
-#carrinho input{
-  width:100%;
-  padding:8px;
-  margin:5px 0;
+.controls button{
+  margin:0 4px;
 }
 
-/* RODAPÉ */
+/* ===== FORM ===== */
+input,textarea{
+  width:100%;
+  margin-top:6px;
+  padding:8px;
+  border-radius:6px;
+  border:1px solid #ccc;
+}
+.finalizar{
+  background:#25D366;
+  color:#fff;
+  padding:12px;
+  border:none;
+  width:100%;
+  margin-top:10px;
+  border-radius:8px;
+  font-weight:bold;
+}
+
+/* ===== FOOTER ===== */
 footer{
-  background:#fff;
-  padding:20px;
+  background:url("img/restaurante.webp") center/cover no-repeat;
   text-align:center;
+  padding:25px;
 }
 footer img{
   width:40px;
-  margin:0 12px;
+  margin:10px;
+  transition:.3s;
 }
+footer img:hover{transform:scale(1.2)}
 </style>
 </head>
 
@@ -130,96 +148,86 @@ footer img{
 </header>
 
 <nav>
-  <button onclick="mostrar('hamburguer')">Hambúrguer</button>
-  <button onclick="mostrar('hotdog')">Hot Dog</button>
-  <button onclick="mostrar('combo')">Combos</button>
-  <button onclick="mostrar('bebida')">Bebidas</button>
+  <button onclick="mostrar('hamb')">🍔 Hambúrguer</button>
+  <button onclick="mostrar('hot')">🌭 Hot Dog</button>
+  <button onclick="mostrar('beb')">🥤 Bebidas</button>
+  <button onclick="mostrar('combo')">🎁 Combos</button>
 </nav>
 
-<div id="fundo-restaurante">
-  <section id="cardapio"></section>
+<div class="menu-bg">
+<section>
+<h2 id="titulo">Escolha uma categoria</h2>
+<div class="grid" id="menu"></div>
+</section>
 </div>
 
-<div id="carrinho">
-  <h3>Carrinho</h3>
-  <ul id="lista"></ul>
+<div id="cart">
+<h3>🛒 Seu Pedido</h3>
+<div id="items"></div>
+<p>Taxa entrega: R$ 3,50</p>
+<p><b>Total: R$ <span id="total">0</span></b></p>
 
-  <input id="nome" placeholder="Seu nome">
-  <input id="endereco" placeholder="Endereço de entrega">
+<input id="nome" placeholder="Seu nome">
+<input id="endereco" placeholder="Endereço">
+<textarea id="obs" placeholder="Observações"></textarea>
 
-  <p>Taxa de entrega: R$ 3,50</p>
-  <p><strong>Total: R$ <span id="total">0.00</span></strong></p>
-
-  <button onclick="finalizar()">Finalizar Pedido</button>
+<button class="finalizar" onclick="finalizar()">Finalizar no WhatsApp</button>
 </div>
 
 <footer>
-  <a href="https://instagram.com/cantinho_da_villazs" target="_blank">
-    <img src="img/intagram.jpg">
-  </a>
-  <a href="https://wa.me/5511913533982" target="_blank">
-    <img src="img/whatsapp.webp">
-  </a>
+<p>Siga a gente</p>
+<a href="https://instagram.com/cantinho_da_villazs" target="_blank">
+<img src="img/intagram.jpg">
+</a>
+<a href="https://wa.me/5511913533982" target="_blank">
+<img src="img/whatsapp.webp">
+</a>
 </footer>
 
 <script>
-const taxa = 3.5;
-let carrinho = [];
-
-const produtos = {
-  hamburguer:[["X-Burguer",15],["X-Salada",17],["X-Bacon",19],["X-Tudo",22],["X-Duplo",25]],
-  hotdog:[["Hot Dog Simples",10],["Hot Dog Duplo",13],["Hot Dog Bacon",15],["Hot Dog Tudo",18],["Hot Dog Especial",20]],
-  combo:[["Combo 1",30],["Combo 2",35],["Combo 3",40],["Combo 4",45],["Combo 5",50]],
-  bebida:[["Refrigerante",6],["Suco",7],["Água",4],["Água c/ gás",5],["Lata Zero",6]]
+const dados={
+ hamb:[["X-Burger",15],["X-Salada",17],["X-Bacon",19],["X-Egg",18],["X-Tudo",22]],
+ hot:[["Hot Simples",10],["Hot Bacon",14],["Hot Cheddar",15],["Hot Duplo",18],["Hot Especial",20]],
+ beb:[["Refrigerante",5],["Suco",6],["Água",3],["H2O",4],["Guaraná",5]],
+ combo:[["Combo 1",25],["Combo 2",28],["Combo 3",30],["Combo 4",32],["Combo 5",35]]
 };
 
-function mostrar(tipo){
-  document.getElementById("cardapio").innerHTML =
-    `<div class="grid">${
-      produtos[tipo].map(p =>
-        `<div class="card">
-          <h3>${p[0]}</h3>
-          <p>R$ ${p[1].toFixed(2)}</p>
-          <button onclick="add('${p[0]}',${p[1]})">Adicionar</button>
-        </div>`
-      ).join("")
-    }</div>`;
+let carrinho=[];
+const taxa=3.5;
+
+function mostrar(cat){
+ document.getElementById("menu").innerHTML="";
+ document.getElementById("titulo").innerText=cat.toUpperCase();
+ dados[cat].forEach(i=>{
+  menu.innerHTML+=`<div class="card">
+  <h3>${i[0]}</h3>
+  <p>R$ ${i[1]}</p>
+  <button onclick="add('${i[0]}',${i[1]})">Adicionar</button>
+  </div>`;
+ });
 }
 
-function add(nome,valor){
-  carrinho.push({nome,valor});
-  atualizar();
+function add(n,p){
+ carrinho.push({n,p});
+ render();
 }
 
-function remover(i){
-  carrinho.splice(i,1);
-  atualizar();
-}
-
-function atualizar(){
-  const lista = document.getElementById("lista");
-  lista.innerHTML = "";
-  let total = taxa;
-
-  carrinho.forEach((item,i)=>{
-    total += item.valor;
-    lista.innerHTML += `<li>${item.nome} - R$ ${item.valor.toFixed(2)}
-      <button onclick="remover(${i})">❌</button></li>`;
-  });
-
-  document.getElementById("total").innerText = total.toFixed(2);
+function render(){
+ let html="",t=taxa;
+ carrinho.forEach((i,idx)=>{
+  t+=i.p;
+  html+=`<div class="item">${i.n} 
+  <button onclick="carrinho.splice(${idx},1);render()">❌</button></div>`;
+ });
+ items.innerHTML=html;
+ total.innerText=t.toFixed(2);
 }
 
 function finalizar(){
-  const nome = document.getElementById("nome").value;
-  const end = document.getElementById("endereco").value;
-  if(!nome || !end){ alert("Preencha nome e endereço"); return; }
-
-  let msg = `Pedido - ${nome}%0AEndereço: ${end}%0A`;
-  carrinho.forEach(i=> msg += `- ${i.nome}%0A`);
-  msg += `Taxa: R$ 3,50`;
-
-  window.open(`https://wa.me/5511913533982?text=${msg}`);
+ let msg=`Pedido Cantinho da Villa%0A`;
+ carrinho.forEach(i=>msg+=`- ${i.n}%0A`);
+ msg+=`Taxa: R$ 3,50%0ATotal: R$ ${total.innerText}`;
+ window.open(`https://wa.me/5511913533982?text=${msg}`);
 }
 </script>
 
