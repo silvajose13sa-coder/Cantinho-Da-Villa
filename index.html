@@ -379,6 +379,14 @@ function renderPainel(){
  document.getElementById("conteudoPainel").innerHTML=html;
 }
 </script>
+function toggleItem(cat,idx){
+ dados[cat][idx].ativo = !dados[cat][idx].ativo;
+ renderPainel();
+
+ if(document.getElementById("titulo").innerText === cat.toUpperCase()){
+  mostrar(cat);
+ }
+}
 
 </body>
 </html>
