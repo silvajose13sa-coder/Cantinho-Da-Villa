@@ -272,6 +272,37 @@ function renderPainel(){
  conteudoPainel.innerHTML=html;
 }
 </script>
+<script>
+import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+import { getApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
 
+const db = getFirestore(getApp());
+
+async function enviarCardapio() {
+  await setDoc(doc(db, "produtos", "cardapio"), {
+    hamb: [
+      { nome: "X-Burger", preco: 15, ativo: true },
+      { nome: "X-Salada", preco: 17, ativo: true },
+      { nome: "X-Bacon", preco: 19, ativo: true }
+    ],
+    hot: [
+      { nome: "Hot Simples", preco: 10, ativo: true },
+      { nome: "Hot Bacon", preco: 14, ativo: true }
+    ],
+    beb: [
+      { nome: "Refrigerante", preco: 5, ativo: true },
+      { nome: "Água", preco: 3, ativo: true }
+    ],
+    combo: [
+      { nome: "Combo 1", preco: 25, ativo: true }
+    ]
+  }, { merge: true });
+
+  alert("Cardápio enviado com sucesso!");
+}
+
+enviarCardapio();
+</script>
+  
 </body>
 </html>
