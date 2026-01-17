@@ -7,12 +7,9 @@
 
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{
-  font-family:Arial,Helvetica,sans-serif;
-  background:#fff8e1;
-}
+body{font-family:Arial,Helvetica,sans-serif;background:#fff8e1}
 
-/* ===== TOPO ===== */
+/* TOPO */
 header{
   background:url("img/vila-topo.jpg") center/cover no-repeat;
   text-align:center;
@@ -22,7 +19,7 @@ header{
 header img{width:140px}
 header h1{text-shadow:2px 2px 6px #000}
 
-/* ===== MENU ===== */
+/* MENU */
 nav{
   display:flex;
   justify-content:center;
@@ -40,15 +37,14 @@ nav button{
   cursor:pointer;
 }
 
-/* ===== FUNDO CARDÁPIO ===== */
+/* FUNDO */
 .menu-bg{
   background:url("img/restaurante.webp") center/cover no-repeat;
   padding:30px 15px;
 }
 
-/* ===== SEÇÃO ===== */
 section{
-  background:rgba(255,255,255,0.95);
+  background:rgba(255,255,255,.95);
   max-width:1000px;
   margin:auto;
   padding:20px;
@@ -56,7 +52,6 @@ section{
 }
 h2{text-align:center;color:#b71c1c}
 
-/* ===== GRID ===== */
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
@@ -79,7 +74,7 @@ h2{text-align:center;color:#b71c1c}
   border-radius:6px;
 }
 
-/* ===== BOTÃO CARRINHO ===== */
+/* CARRINHO */
 .cart-btn{
   position:fixed;
   bottom:20px;
@@ -92,8 +87,6 @@ h2{text-align:center;color:#b71c1c}
   cursor:pointer;
   z-index:9999;
 }
-
-/* ===== PAINEL CARRINHO ===== */
 .cart-panel{
   position:fixed;
   bottom:0;
@@ -102,7 +95,6 @@ h2{text-align:center;color:#b71c1c}
   max-height:85%;
   background:#fff;
   border-radius:16px 16px 0 0;
-  box-shadow:0 -4px 20px rgba(0,0,0,.4);
   transform:translateY(100%);
   transition:.3s;
   z-index:9999;
@@ -110,13 +102,8 @@ h2{text-align:center;color:#b71c1c}
   overflow:auto;
 }
 .cart-panel.active{transform:translateY(0)}
-.item{
-  display:flex;
-  justify-content:space-between;
-  margin-bottom:6px;
-}
+.item{display:flex;justify-content:space-between;margin-bottom:6px}
 
-/* ===== FORM ===== */
 input,textarea{
   width:100%;
   margin-top:6px;
@@ -135,18 +122,13 @@ input,textarea{
   font-weight:bold;
 }
 
-/* ===== FOOTER ===== */
+/* FOOTER */
 footer{
   background:url("img/vila-topo.jpg") center/cover no-repeat;
   text-align:center;
   padding:25px;
 }
-footer img{
-  width:40px;
-  margin:10px;
-  transition:.3s;
-}
-footer img:hover{transform:scale(1.2)}
+footer img{width:40px;margin:10px}
 </style>
 </head>
 
@@ -172,80 +154,64 @@ footer img:hover{transform:scale(1.2)}
 </section>
 </div>
 
-<div class="cart-btn" onclick="toggleCart()">🛒 Ver pedido (<span id="qtd">0</span>)</div>
+<div class="cart-btn" onclick="toggleCart()">🛒 Pedido (<span id="qtd">0</span>)</div>
 
 <div class="cart-panel" id="cart">
-  <div style="display:flex;justify-content:space-between;align-items:center">
-    <h3>Seu Pedido</h3>
-    <button onclick="toggleCart()" style="background:none;border:none;font-size:22px;cursor:pointer">✖</button>
-  </div>
-
+  <h3>Seu Pedido</h3>
   <div id="items"></div>
   <p>Taxa entrega: R$ 3,50</p>
   <p><b>Total: R$ <span id="total">0</span></b></p>
-
-  <input id="nome" placeholder="Seu nome">
-  <input id="endereco" placeholder="Endereço">
-  <textarea id="obs" placeholder="Observações"></textarea>
-
   <button class="finalizar" onclick="finalizar()">Finalizar no WhatsApp</button>
 </div>
 
-<footer>
-<p>Siga a gente</p>
-<a href="https://instagram.com/cantinho_da_villazs" target="_blank">
-<img src="img/intagram.jpg">
-</a>
-<a href="https://wa.me/5511913533982" target="_blank">
-<img src="img/whatsapp.webp">
-</a>
-</footer>
-
-<!-- PAINEL DO CHEFE -->
-<div id="painel" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:#000000cc;z-index:99999;overflow:auto">
+<!-- PAINEL -->
+<div id="painel" style="display:none;position:fixed;inset:0;background:#0008;z-index:99999">
  <div style="background:#fff;max-width:500px;margin:40px auto;padding:20px;border-radius:12px">
   <h2>Painel do Chefe</h2>
   <input id="senhaPainel" type="password" placeholder="Senha">
   <button onclick="entrarPainel()">Entrar</button>
-  <div id="conteudoPainel" style="display:none;margin-top:20px"></div>
-  <button onclick="fecharPainel()" style="margin-top:15px">Fechar</button>
+  <div id="conteudoPainel" style="margin-top:15px"></div>
+  <button onclick="fecharPainel()">Fechar</button>
  </div>
 </div>
 
-<script>
-const dados={
- hamb:[
-  {nome:"X-Burger",preco:15,ativo:true},
-  {nome:"X-Salada",preco:17,ativo:true},
-  {nome:"X-Bacon",preco:19,ativo:true},
-  {nome:"X-Egg",preco:18,ativo:true},
-  {nome:"X-Tudo",preco:22,ativo:true}
- ],
- hot:[
-  {nome:"Hot Simples",preco:10,ativo:true},
-  {nome:"Hot Bacon",preco:14,ativo:true},
-  {nome:"Hot Cheddar",preco:15,ativo:true},
-  {nome:"Hot Duplo",preco:18,ativo:true},
-  {nome:"Hot Especial",preco:20,ativo:true}
- ],
- beb:[
-  {nome:"Refrigerante",preco:5,ativo:true},
-  {nome:"Suco",preco:6,ativo:true},
-  {nome:"Água",preco:3,ativo:true},
-  {nome:"H2O",preco:4,ativo:true},
-  {nome:"Guaraná",preco:5,ativo:true}
- ],
- combo:[
-  {nome:"Combo 1",preco:25,ativo:true},
-  {nome:"Combo 2",preco:28,ativo:true},
-  {nome:"Combo 3",preco:30,ativo:true},
-  {nome:"Combo 4",preco:32,ativo:true},
-  {nome:"Combo 5",preco:35,ativo:true}
- ]
-};
+<!-- FIREBASE -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 
-let carrinho=[];
-const taxa=3.5;
+<script>
+firebase.initializeApp({
+  apiKey: "AIzaSyB98Yu2YieFD2DPFQPAWhMb36zMb2TkM6g",
+  authDomain: "cantinho-da-villa.firebaseapp.com",
+  projectId: "cantinho-da-villa"
+});
+const db = firebase.firestore();
+
+const SENHA = "s@Samuel2018";
+const taxa = 3.5;
+let carrinho = [];
+let dados = {};
+
+async function carregarDados(){
+ const ref = db.collection("produtos").doc("cardapio");
+ const doc = await ref.get();
+ if(!doc.exists){
+   dados = {
+    hamb:[{nome:"X-Burger",preco:15,ativo:true}],
+    hot:[],
+    beb:[],
+    combo:[]
+   };
+   await ref.set(dados);
+ }else{
+   dados = doc.data();
+ }
+}
+carregarDados();
+
+async function salvarDados(){
+ await db.collection("produtos").doc("cardapio").set(dados);
+}
 
 function mostrar(cat){
  menu.innerHTML="";
@@ -261,89 +227,50 @@ function mostrar(cat){
  });
 }
 
-function add(n,p){
- carrinho.push({n,p});
- render();
-}
-
+function add(n,p){carrinho.push({n,p});render()}
 function render(){
- let html="",t=taxa;
+ let t=taxa,html="";
  carrinho.forEach((i,idx)=>{
   t+=i.p;
-  html+=`
-   <div class="item">
-    ${i.n}
-    <button onclick="carrinho.splice(${idx},1);render()">❌</button>
-   </div>`;
+  html+=`${i.n} <button onclick="carrinho.splice(${idx},1);render()">❌</button><br>`;
  });
  items.innerHTML=html;
  total.innerText=t.toFixed(2);
  qtd.innerText=carrinho.length;
 }
 
-function toggleCart(){
- cart.classList.toggle("active");
-}
-
+function toggleCart(){cart.classList.toggle("active")}
 function finalizar(){
- let msg=`Pedido Cantinho da Villa%0A`;
+ let msg="Pedido Cantinho da Villa%0A";
  carrinho.forEach(i=>msg+=`- ${i.n}%0A`);
- msg+=`Taxa: R$ 3,50%0ATotal: R$ ${total.innerText}`;
+ msg+=`Total: R$ ${total.innerText}`;
  window.open(`https://wa.me/5511913533982?text=${msg}`);
 }
-
-document.addEventListener("click",e=>{
- if(cart.classList.contains("active") && !cart.contains(e.target) && !document.querySelector(".cart-btn").contains(e.target)){
-  cart.classList.remove("active");
- }
-});
-
-const SENHA="s@Samuel2018";
 
 function abrirPainel(){painel.style.display="block"}
 function fecharPainel(){painel.style.display="none"}
 
 function entrarPainel(){
  if(senhaPainel.value!==SENHA){alert("Senha incorreta");return}
- conteudoPainel.style.display="block";
  renderPainel();
 }
 
 function renderPainel(){
  let html="";
  for(let cat in dados){
-  html+=`<h3>${cat.toUpperCase()}</h3>`;
+  html+=`<h3>${cat}</h3>`;
   dados[cat].forEach((i,idx)=>{
    html+=`
-    <div style="display:flex;gap:6px;align-items:center;margin-bottom:6px">
-     <span>${i.nome}</span>
-     <input type="number" value="${i.preco}" style="width:70px" onchange="dados['${cat}'][${idx}].preco=this.value">
-     <button onclick="dados['${cat}'][${idx}].ativo=!dados['${cat}'][${idx}].ativo;renderPainel()">
-      ${i.ativo?"🟢 ON":"🔴 OFF"}
-     </button>
-    </div>`;
+    ${i.nome}
+    <input type="number" value="${i.preco}" 
+      onchange="dados['${cat}'][${idx}].preco=this.value;salvarDados()">
+    <button onclick="dados['${cat}'][${idx}].ativo=!dados['${cat}'][${idx}].ativo;salvarDados();renderPainel()">
+     ${i.ativo?"ON":"OFF"}
+    </button><br>`;
   });
  }
  conteudoPainel.innerHTML=html;
 }
-</script>
-
-<!-- FIREBASE CDN -->
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
-
-<script>
-  const firebaseConfig = {
-    apiKey: "AIzaSyB98Yu2YieFD2DPFQPAWhMb36zMb2TkM6g",
-    authDomain: "cantinho-da-villa.firebaseapp.com",
-    projectId: "cantinho-da-villa",
-    storageBucket: "cantinho-da-villa.appspot.com",
-    messagingSenderId: "865973139564",
-    appId: "1:865973139564:web:65fb55e16e39294e958049"
-  };
-
-  firebase.initializeApp(firebaseConfig);
-  const db = firebase.firestore();
 </script>
 
 </body>
