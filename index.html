@@ -328,6 +328,23 @@ function renderPainel(){
 }
 </script>
 
+<!-- FIREBASE CDN -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyB98Yu2YieFD2DPFQPAWhMb36zMb2TkM6g",
+    authDomain: "cantinho-da-villa.firebaseapp.com",
+    projectId: "cantinho-da-villa",
+    storageBucket: "cantinho-da-villa.appspot.com",
+    messagingSenderId: "865973139564",
+    appId: "1:865973139564:web:65fb55e16e39294e958049"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+</script>
 
 </body>
 </html>
