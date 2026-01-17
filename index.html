@@ -272,36 +272,46 @@ function renderPainel(){
  conteudoPainel.innerHTML=html;
 }
 </script>
-<script>
-import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
-import { getApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
+  import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 
-const db = getFirestore(getApp());
+  const firebaseConfig = {
+    apiKey: "AIzaSyB98YU2YIeFD2DPFQPAWhMb36zMb2TKM6g",
+    authDomain: "cantinho-da-villa.firebaseapp.com",
+    projectId: "cantinho-da-villa",
+    storageBucket: "cantinho-da-villa.appspot.com",
+    messagingSenderId: "865973139564",
+    appId: "1:865973139564:web:65fb55e16e39294e958049"
+  };
 
-async function enviarCardapio() {
-  await setDoc(doc(db, "produtos", "cardapio"), {
-    hamb: [
-      { nome: "X-Burger", preco: 15, ativo: true },
-      { nome: "X-Salada", preco: 17, ativo: true },
-      { nome: "X-Bacon", preco: 19, ativo: true }
-    ],
-    hot: [
-      { nome: "Hot Simples", preco: 10, ativo: true },
-      { nome: "Hot Bacon", preco: 14, ativo: true }
-    ],
-    beb: [
-      { nome: "Refrigerante", preco: 5, ativo: true },
-      { nome: "Água", preco: 3, ativo: true }
-    ],
-    combo: [
-      { nome: "Combo 1", preco: 25, ativo: true }
-    ]
-  }, { merge: true });
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
 
-  alert("Cardápio enviado com sucesso!");
-}
+  await setDoc(
+    doc(db, "produtos", "cardapio"),
+    {
+      hamb: [
+        { nome: "X-Burger", preco: 15, ativo: true },
+        { nome: "X-Salada", preco: 17, ativo: true },
+        { nome: "X-Bacon", preco: 19, ativo: true }
+      ],
+      hot: [
+        { nome: "Hot Simples", preco: 10, ativo: true },
+        { nome: "Hot Bacon", preco: 14, ativo: true }
+      ],
+      beb: [
+        { nome: "Refrigerante", preco: 5, ativo: true },
+        { nome: "Água", preco: 3, ativo: true }
+      ],
+      combo: [
+        { nome: "Combo 1", preco: 25, ativo: true }
+      ]
+    },
+    { merge: true }
+  );
 
-enviarCardapio();
+  alert("Cardápio salvo com sucesso no Firestore!");
 </script>
   
 </body>
