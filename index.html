@@ -127,7 +127,7 @@ footer{
 }  
 footer img{width:40px;margin:10px}  
 </style>  </head>  <body>  <header>  
-  <img src="logo.png">  
+  <img src="logo.png" id="logo">  
   <h1>Cantinho da Villa</h1>  
 </header>  <nav>  
   <button onclick="abrirPainel()">🔒 Painel do Chefe</button>  
@@ -329,6 +329,22 @@ function renderPainel(){
     },  
     { merge: true }  
   );  
-  
-</script>  </body>  
+  let cliquesLogo = 0;
+
+document.getElementById("logo").addEventListener("click", () => {
+  cliquesLogo++;
+
+  if(cliquesLogo === 5){
+    cliquesLogo = 0;
+    const codigo = prompt("Digite o código do chefe:");
+    if(codigo === "villa123"){
+      painel.style.display = "block";
+    } else {
+      alert("Código incorreto");
+    }
+  }
+
+  setTimeout(() => cliquesLogo = 0, 2000);
+});
+</script> </body>  
 </html>
