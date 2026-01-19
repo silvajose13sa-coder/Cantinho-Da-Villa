@@ -59,8 +59,16 @@ h2{text-align:center;color:#b71c1c}
   background:#fff;  
   padding:15px;  
   border-radius:10px;  
-  box-shadow:0 4px 10px rgba(0,0,0,.2);  
-}  
+  box-shadow:0 4px 10px rgba(0,0,0,.2); 
+  .card{
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card:hover{
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 10px 25px rgba(0,0,0,.3);
+} 
+  
 .card button{  
   width:100%;  
   padding:8px;  
