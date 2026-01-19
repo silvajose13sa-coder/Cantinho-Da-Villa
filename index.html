@@ -141,12 +141,19 @@ footer img{width:40px;margin:10px}
 <h2 id="titulo">Escolha uma categoria</h2>  
 <div class="grid" id="menu"></div>  
 </section>  
-</div>  <div class="cart-btn" onclick="toggleCart()">🛒 Pedido (<span id="qtd">0</span>)</div>  <div class="cart-panel" id="cart">  
-  <h3>Seu Pedido</h3>  
-  <div id="items"></div>  
-  <p>Taxa entrega: R$ 3,50</p>  
-  <p><b>Total: R$ <span id="total">0</span></b></p>  
-  <button class="finalizar" onclick="finalizar()">Finalizar no WhatsApp</button>  
+</div>  <div class="cart-panel" id="cart">
+  <h3 style="display:flex;justify-content:space-between;align-items:center">
+    Seu Pedido
+    <span style="cursor:pointer;font-size:20px" onclick="toggleCart()🛒">✖</span>
+  </h3>
+
+  <div id="items"></div>
+
+  <p>Taxa entrega: R$ 3,50</p>
+  <p><b>Total: R$ <span id="total">0</span></b></p>
+
+  <button class="finalizar" onclick="finalizar()">Finalizar no WhatsApp</button>
+</div>  
 </div>  <!-- PAINEL -->  <div id="painel" style="display:none;position:fixed;inset:0;background:#0008;z-index:99999">  
  <div style="
   background:#fff;
