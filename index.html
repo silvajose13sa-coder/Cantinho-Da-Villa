@@ -148,7 +148,15 @@ footer img{width:40px;margin:10px}
   <p><b>Total: R$ <span id="total">0</span></b></p>  
   <button class="finalizar" onclick="finalizar()">Finalizar no WhatsApp</button>  
 </div>  <!-- PAINEL -->  <div id="painel" style="display:none;position:fixed;inset:0;background:#0008;z-index:99999">  
- <div style="background:#fff;max-width:500px;margin:40px auto;padding:20px;border-radius:12px">  
+ <div style="
+  background:#fff;
+  max-width:500px;
+  margin:40px auto;
+  padding:20px;
+  border-radius:12px;
+  max-height:80vh;
+  overflow-y:auto;
+">  
   <h2>Painel do Chefe</h2>  
   <input id="senhaPainel" type="password" placeholder="Senha">  
   <button onclick="entrarPainel()">Entrar</button>  
