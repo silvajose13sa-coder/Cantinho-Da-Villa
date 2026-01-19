@@ -244,7 +244,14 @@ function finalizar(){
  window.open(`https://wa.me/5511913533982?text=${msg}`);  
 }  
   
-function abrirPainel(){painel.style.display="block"}  
+function abrirPainel(){
+  const codigo = prompt("Digite o código do chefe:");
+  if(codigo !== "villa123"){
+    alert("Código incorreto");
+    return;
+  }
+  painel.style.display = "block";
+  }  
 function fecharPainel(){painel.style.display="none"}  
   
 function entrarPainel(){  
