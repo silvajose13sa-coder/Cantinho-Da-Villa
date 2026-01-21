@@ -13,12 +13,20 @@ html, body {
 
 }  
 /* TOPO */  
-header{  
-  background:url("img/vila-topo.jpg") center/cover no-repeat;  
-  text-align:center;  
-  color:#fff;  
-  padding:70px 20px;  
-}  
+header {
+  width: 100%;
+  min-height: 70vh; /* controla a altura da imagem da vila */
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+  color: #fff;
+
+  background: url("img/vila-topo.jpg") center / cover no-repeat;
+}
 header img{width:140px}  
 header h1{text-shadow:2px 2px 6px #000}  
   
