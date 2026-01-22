@@ -432,5 +432,38 @@ document.getElementById("logo").addEventListener("click", () => {
 
   setTimeout(() => cliquesLogo = 0, 2000);
 });
+  // ✅ ABRIR PAINEL (código do chefe)
+function abrirPainel(){
+  const codigo = prompt("Digite o código do chefe:");
+  if(codigo !== "villa123"){
+    alert("Código incorreto");
+    return;
+  }
+  painel.style.display = "block";
+}
+
+// ✅ Clique secreto: 5 cliques na logo em até 2 segundos
+(function(){
+  const logoEl = document.getElementById("logo");
+  if(!logoEl){
+    console.log("❌ Não achei #logo. Coloque id='logo' na imagem.");
+    return;
+  }
+
+  let cliquesLogo = 0;
+  let timer = null;
+
+  logoEl.addEventListener("click", () => {
+    cliquesLogo++;
+
+    if (timer) clearTimeout(timer);
+    timer = setTimeout(() => { cliquesLogo = 0; }, 2000);
+
+    if (cliquesLogo >= 5) {
+      cliquesLogo = 0;
+      abrirPainel();
+    }
+  });
+})();
 </script> </body>  
 </html>
