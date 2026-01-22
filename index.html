@@ -241,6 +241,17 @@ footer img{width:40px;margin:10px}
 
   <p>Taxa entrega: R$ 3,50</p>
   <p><b>Total: R$ <span id="total">0</span></b></p>
+    
+    <div class="checkout">
+  <label>Seu nome</label>
+  <input id="clienteNome" type="text" placeholder="Ex: Samuel" autocomplete="name">
+
+  <label>Endereço</label>
+  <input id="clienteEndereco" type="text" placeholder="Rua, número, bairro" autocomplete="street-address">
+
+  <label>Observações (opcional)</label>
+  <textarea id="clienteObs" placeholder="Ex: sem cebola, maionese à parte"></textarea>
+    </div>
 
   <button class="finalizar" onclick="finalizar()">Finalizar no WhatsApp</button>
 </div>  
@@ -323,12 +334,41 @@ function render(){
 }  
   
 function toggleCart(){cart.classList.toggle("active")}  
-function finalizar(){  
- let msg="Pedido Cantinho da Villa%0A";  
- carrinho.forEach(i=>msg+=`- ${i.n}%0A`);  
- msg+=`Total: R$ ${total.innerText}`;  
- window.open(`https://wa.me/5511913533982?text=${msg}`);  
-}  
+function finalizar(){
+  const nome = document.getElementById("clienteNome").value.trim();
+  const endereco = document.getElementById("clienteEndereco").value.trim();
+  const obs = document.getElementById("clienteObs").value.trim();
+
+  if(carrinho.length === 0){
+    alert("Seu carrinho está vazio.");
+    return;
+  }
+  if(!nome){
+    alert("Digite seu nome.");
+    document.getElementById("clienteNome").focus();
+    return;
+  }
+  if(!endereco){
+    alert("Digite seu endereço.");
+    document.getElementById("clienteEndereco").focus();
+    return;
+  }
+
+  let msg = `*Pedido Cantinho da Villa*%0A`;
+  msg += `%0A*Cliente:* ${encodeURIComponent(nome)}%0A`;
+  msg += `*Endereço:* ${encodeURIComponent(endereco)}%0A`;
+  if(obs) msg += `*Obs:* ${encodeURIComponent(obs)}%0A`;
+
+  msg += `%0A*Itens:*%0A`;
+  carrinho.forEach(i => {
+    msg += `- ${encodeURIComponent(i.n)}%0A`;
+  });
+
+  msg += `%0A*Taxa:* R$ 3,50%0A`;
+  msg += `*Total:* R$ ${encodeURIComponent(total.innerText)}%0A`;
+
+  window.open(`https://wa.me/5511913533982?text=${msg}`);
+   }
   
 function abrirPainel(){
   const codigo = prompt("Digite o código do chefe:");
@@ -474,5 +514,42 @@ function abrirPainel(){
     }
   });
 })();
+  .checkout{
+  margin-top:14px;
+  padding:12px;
+  border-radius:12px;
+  background:#f7f7f7;
+  border:1px solid #e6e6e6;
+}
+
+.checkout label{
+  display:block;
+  font-size:13px;
+  font-weight:700;
+  margin-top:10px;
+  margin-bottom:6px;
+  color:#333;
+}
+
+.checkout input,
+.checkout textarea{
+  width:100%;
+  padding:12px 12px;
+  border-radius:10px;
+  border:1px solid #d9d9d9;
+  outline:none;
+  font-size:14px;
+  background:#fff;
+}
+
+.checkout textarea{
+  min-height:80px;
+  resize:vertical;
+}
+
+.checkout input:focus,
+.checkout textarea:focus{
+  border-color:#2e7d32;
+      }
 </script> </body>  
 </html>
