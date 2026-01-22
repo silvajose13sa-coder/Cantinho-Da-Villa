@@ -185,6 +185,9 @@ footer img{width:40px;margin:10px}
   .social-top a:active{
     transform: scale(0.95);
   }
+  .card p{
+  line-height:1.3;
+}
   /* TAMANHO DA LOGO */
 .logo{
   width:300px;   /* aumenta/diminui aqui */
@@ -297,12 +300,13 @@ function mostrar(cat){
  titulo.innerText=cat.toUpperCase();  
  dados[cat].forEach(i=>{  
   if(!i.ativo) return;  
-  menu.innerHTML+=`  
-   <div class="card">  
-    <h3>${i.nome}</h3>  
-    <p>R$ ${i.preco}</p>  
-    <button onclick="add('${i.nome}',${i.preco})">Adicionar</button>  
-   </div>`;  
+ menu.innerHTML+=`
+ <div class="card">
+  <h3>${i.nome}</h3>
+  <p style="opacity:.85;margin:6px 0">${i.desc ? i.desc : ""}</p>
+  <p><b>R$ ${i.preco}</b></p>
+  <button onclick="add('${i.nome}',${i.preco})">Adicionar</button>
+ </div>`;
  });  
 }  
   
@@ -377,7 +381,7 @@ function renderPainel(){
     doc(db, "produtos", "cardapio"),  
     {  
       hamb: [  
-        { nome: "X-Burger", preco: 15, ativo: true },  
+        { nome:"X-Burger", desc:"Pão, hambúrguer, queijo e molho.", preco:15, ativo:true }  
         { nome: "X-Salada", preco: 17, ativo: true },  
         { nome: "X-Bacon", preco: 19, ativo: true },
         { nome: "X-Egg", preco: 20, ativo: true },
