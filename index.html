@@ -380,37 +380,46 @@ function renderPainel(){
   await setDoc(  
     doc(db, "produtos", "cardapio"),  
     {  
-      hamb: [  
-        { nome:"X-Burger", desc:"Pão, hambúrguer, queijo e molho.", preco:15, ativo:true },  
-        { nome: "X-Salada", preco: 17, ativo: true },  
-        { nome: "X-Bacon", preco: 19, ativo: true },
-        { nome: "X-Egg", preco: 20, ativo: true },
-        { nome: "X-Tudo", preco: 25, ativo: true }
-      ],  
-      hot: [  
-        { nome: "Hot Simples", preco: 10, ativo: true },  
-        { nome: "Hot Bacon", preco: 14, ativo: true }  
-      ],  
-      beb: [  
-        { nome: "Coca Cola", preco: 5, ativo: true },  
-        { nome: "Fanta", preco: 3, ativo: true },
-        { nome: "Tubaína", preco: 7, ativo: true },
-        { nome: "Suco", preco: 6, ativo: true },
-        { nome: "água", preco: 4, ativo: true }
-      ],  
-      combo: [  
-        { nome: "Combo 1", preco: 25, ativo: true },
-        { nome: "Combo 2", preco: 25, ativo: true },
-        { nome: "Combo 3", preco: 25, ativo: true },
-        { nome: "Combo 4", preco: 25, ativo: true },
-        { nome: "Combo 5", preco: 25, ativo: true }
-      ],  
-      batata: [
-        { nome: "Batata Pequena", preco: 8, ativo: true },
-        { nome: "Batata Média", preco: 12, ativo: true },
-        { nome: "Batata Grande", preco: 16, ativo: true },
-        { nome: "Batata com Cheddar", preco: 18, ativo: true },
-        { nome: "Batata com Bacon", preco: 20, ativo: true }
+      // ✅ DESCRIÇÕES (cole/atualize seus itens assim)
+
+hamb: [
+  { nome:"X-Burger", desc:"Pão, hambúrguer, queijo e molho da casa.", preco:15, ativo:true },
+  { nome:"X-Salada", desc:"Pão, hambúrguer, queijo, alface, tomate e maionese.", preco:17, ativo:true },
+  { nome:"X-Bacon", desc:"Pão, hambúrguer, queijo, bacon crocante e molho da casa.", preco:19, ativo:true },
+  { nome:"X-Egg", desc:"Pão, hambúrguer, queijo, ovo e maionese.", preco:20, ativo:true },
+  { nome:"X-Tudo", desc:"Pão, hambúrguer, queijo, bacon, ovo, alface, tomate e molho.", preco:25, ativo:true }
+],
+
+hot: [
+  { nome:"Hot Simples", desc:"Pão, salsicha, purê, batata palha e molho.", preco:10, ativo:true },
+  { nome:"Hot Bacon", desc:"Pão, salsicha, bacon, purê, batata palha e molho.", preco:14, ativo:true },
+  { nome:"Hot Cheddar", desc:"Pão, salsicha, cheddar, purê, batata palha e molho.", preco:15, ativo:true },
+  { nome:"Hot Duplo", desc:"Pão, 2 salsichas, purê, batata palha e molho.", preco:18, ativo:true },
+  { nome:"Hot Especial", desc:"Pão, salsicha, milho, ervilha, purê, batata palha e molho.", preco:20, ativo:true }
+],
+
+beb: [
+  { nome:"Coca Cola", desc:"Bem gelada pra acompanhar seu lanche.", preco:5, ativo:true },
+  { nome:"Fanta", desc:"Refri gelado, perfeito pra matar a sede.", preco:3, ativo:true },
+  { nome:"Tubaína", desc:"Sabor clássico e bem geladinha.", preco:7, ativo:true },
+  { nome:"Suco", desc:"Suco bem gelado e refrescante.", preco:6, ativo:true },
+  { nome:"Água", desc:"Água gelada pra acompanhar.", preco:4, ativo:true }
+],
+
+combo: [
+  { nome:"Combo 1", desc:"Lanche + bebida (economize no combo).", preco:25, ativo:true },
+  { nome:"Combo 2", desc:"Lanche + batata + bebida.", preco:25, ativo:true },
+  { nome:"Combo 3", desc:"2 lanches + 1 bebida.", preco:25, ativo:true },
+  { nome:"Combo 4", desc:"Lanche + batata turbinada + bebida.", preco:25, ativo:true },
+  { nome:"Combo 5", desc:"Combo completo pra matar a fome!", preco:25, ativo:true }
+],
+
+batata: [
+  { nome:"Batata Pequena", desc:"Porção pequena, crocante e sequinha.", preco:8, ativo:true },
+  { nome:"Batata Média", desc:"Porção média, ideal pra compartilhar.", preco:12, ativo:true },
+  { nome:"Batata Grande", desc:"Porção grande, pra quem tá com fome!", preco:16, ativo:true },
+  { nome:"Batata com Cheddar", desc:"Batata crocante com cheddar cremoso.", preco:18, ativo:true },
+  { nome:"Batata com Bacon", desc:"Batata crocante com bacon crocante.", preco:20, ativo:true }
 ]
     },  
     { merge: true }  
