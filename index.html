@@ -169,7 +169,23 @@ footer{
   text-align:center;  
   padding:25px;  
 }  
-footer img{width:40px;margin:10px}  
+footer img{width:40px;margin:10px}
+  <style>
+  .social-top a{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    transition: transform .2s ease;
+  }
+
+  .social-top a:hover{
+    transform: translateY(-4px) scale(1.08);
+  }
+
+  .social-top a:active{
+    transform: scale(0.95);
+  }
+</style>
 </style>  </head>  <body>  <header>   
   <img src="logo.png" id="logo" class="logo">  
   <h1>Cantinho da Villa</h1> 
